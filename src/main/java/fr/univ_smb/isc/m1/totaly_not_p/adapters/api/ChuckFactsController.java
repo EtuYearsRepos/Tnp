@@ -1,6 +1,6 @@
-package fr.univ_smb.isc.m1.totally_not_p.adapters.api;
+package fr.univ_smb.isc.m1.totaly_not_p.adapters.api;
 
-import fr.univ_smb.isc.m1.totally_not_p.application.*;
+import fr.univ_smb.isc.m1.totaly_not_p.application.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

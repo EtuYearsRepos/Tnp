@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>fr.univ-smb.isc.m1</groupId>
-    <artifactId>totally-not-p</artifactId>
+    <artifactId>totaly-not-p</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>totally-not-p</name>
+    <name>totaly-not-p</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,4 +1,4 @@
-package fr.univ_smb.isc.m1.totally_not_p.application;
+package fr.univ_smb.isc.m1.totaly_not_p.application;
 
 
 public class ChuckFact {

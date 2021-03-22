@@ -1,7 +1,7 @@
-package fr.univ_smb.isc.m1.totally_not_p.adapters.api;
+package fr.univ_smb.isc.m1.totaly_not_p.adapters.api;
 
-import fr.univ_smb.isc.m1.totally_not_p.application.ChuckFact;
-import fr.univ_smb.isc.m1.totally_not_p.application.ChuckFactsService;
+import fr.univ_smb.isc.m1.totaly_not_p.application.ChuckFact;
+import fr.univ_smb.isc.m1.totaly_not_p.application.ChuckFactsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
