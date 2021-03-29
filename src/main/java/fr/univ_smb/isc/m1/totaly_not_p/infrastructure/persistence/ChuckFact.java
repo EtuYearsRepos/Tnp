@@ -1,11 +1,21 @@
-package fr.univ_smb.isc.m1.totaly_not_p.application;
+package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class ChuckFact {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String name;
+
+    public ChuckFact() {
+        // JPA
+    }
 
     public ChuckFact(String name) {
         this.name = name;
