@@ -26,4 +26,12 @@ public class ComicsController {
                 .collect(toList());
     }
 
+    @GetMapping(value="/users")
+    public List<String> users() {
+        return comicsService.allUsers()
+                .stream()
+                .map(p-> p.toString())
+                .collect(toList());
+    }
+
 }

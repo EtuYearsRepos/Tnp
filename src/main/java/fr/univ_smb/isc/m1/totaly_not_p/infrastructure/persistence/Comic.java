@@ -1,10 +1,12 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
+@Table(name = "Comic")
 public class Comic {
 
     @Id
@@ -13,6 +15,10 @@ public class Comic {
 
     private String title;
     private String author;
+    private byte[] thumbnail;
+
+    @ManyToMany(mappedBy = "subscriptions")
+    private Set<User> subscribers = new HashSet<User>();
 
     public Comic() {
         // JPA
@@ -37,6 +43,23 @@ public class Comic {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Lob
+    @Column(name = "THUMBNAIL", length = 1111111, nullable = true)
+    public byte[] getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public Set<User> getSubscribers() {
+        return subscribers;
+    }
+    public void setSubscribers(Set<User> subscribers) {
+        this.subscribers = subscribers;
     }
 
     public String toString() {
