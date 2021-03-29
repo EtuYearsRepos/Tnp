@@ -9,20 +9,20 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-public class ChuckFactsController {
+public class ComicsController {
 
-    private final ChuckFactsService chuckFactsService;
+    private final ComicsService comicsService;
 
-    public ChuckFactsController(ChuckFactsService chuckFactsService) {
-        this.chuckFactsService = chuckFactsService;
+    public ComicsController(ComicsService comicsService) {
+        this.comicsService = comicsService;
     }
 
 
-    @GetMapping(value="/chuck-facts")
-    public List<String> pippos() {
-        return chuckFactsService.facts()
+    @GetMapping(value="/comics")
+    public List<String> comics() {
+        return comicsService.allComics()
                 .stream()
-                .map(p-> p.getName())
+                .map(p-> p.toString())
                 .collect(toList());
     }
 
