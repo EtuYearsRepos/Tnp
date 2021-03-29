@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ChuckFactsRepository extends JpaRepository<ChuckFact, Long> {
+public interface ComicsRepository extends JpaRepository<Comic, Long> {
 
-    ChuckFact findByName(String name);
+    Comic findByTitle(String title);
 
 }

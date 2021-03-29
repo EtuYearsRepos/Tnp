@@ -7,23 +7,23 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
-public class ChuckFactsService {
+public class ComicsService {
 
-    private final ChuckFactsRepository repository;
+    private final ComicsRepository repository;
 
-    public ChuckFactsService(ChuckFactsRepository repository) {
+    public ComicsService(ComicsRepository repository) {
         this.repository = repository;
     }
 
     @PostConstruct
     public void initialize() {
         if (repository.findAll().isEmpty()) {
-            repository.saveAndFlush(new ChuckFact("Chuck Norris can divide by zero."));
-            repository.saveAndFlush(new ChuckFact("Chuck Norris once lost his wedding ring....since then it's been war in Middle Earth"));
+            repository.saveAndFlush(new Comic("BD 1", "AUTEUR 1"));
+            repository.saveAndFlush(new Comic("BD 2", "AUTEUR 2"));
         }
     }
 
-    public List<ChuckFact> facts() {
+    public List<Comic> allComics() {
         return repository.findAll();
     }
 
