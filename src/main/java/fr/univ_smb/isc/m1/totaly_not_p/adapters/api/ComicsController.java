@@ -32,10 +32,11 @@ public class ComicsController {
                 .collect(toList());
     }
 
-    @RequestMapping(value = {  "/index" }, method = RequestMethod.GET)
-    public String index(Model model) {
-        model.addAttribute("message", "salut");
-        return "index";
+    @RequestMapping("/")
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("message", "Bienvenutti");
+        return modelAndView;
     }
 
 }
