@@ -32,7 +32,7 @@ public class ComicsController {
                 .collect(toList());
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"/", "/index"})
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("message", "Bienvenutti");
