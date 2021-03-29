@@ -3,6 +3,12 @@ package fr.univ_smb.isc.m1.totaly_not_p.adapters.api;
 import fr.univ_smb.isc.m1.totaly_not_p.application.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+
 
 import java.util.List;
 
@@ -24,6 +30,12 @@ public class ComicsController {
                 .stream()
                 .map(p-> p.toString())
                 .collect(toList());
+    }
+
+    @RequestMapping(value = {  "/index" }, method = RequestMethod.GET)
+    public String index(Model model) {
+        model.addAttribute("message", "salut");
+        return "index";
     }
 
 }
