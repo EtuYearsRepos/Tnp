@@ -35,7 +35,7 @@ public class ComicsController {
     @RequestMapping({"/", "/index"})
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("message", "Bienvenutti");
+        modelAndView.addObject("message", "Salut mon pote!");
         return modelAndView;
     }
 
