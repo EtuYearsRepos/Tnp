@@ -2,15 +2,14 @@
 <html>
    <head>
       <meta charset="UTF-8" />
-      <title>Hello</title>
+      <title>Index</title>
       <!--<script src='header.js'></script>-->
-      <script type="text/javascript" th:src="@{header.js}" defer></script>
+      <script type="module" th:src="@{body.js}" defer></script>
    </head>
    <body>
       <header id='header'></header>
-      <p th:text="${message}">1</p>
-
-      <button class ="btn_deliveries btn btn_primary" > salut </button>
-   </body>
-   
-</html>
+      <body>
+         <div id="body"></div>
+      </body>
+      <footer id="footer"></footer>
+   </html>
