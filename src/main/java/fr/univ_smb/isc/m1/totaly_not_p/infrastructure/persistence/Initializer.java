@@ -19,9 +19,8 @@ class Initializer {
         repository.deleteAllInBatch();
 
         if (repository.findAll().isEmpty()) {
-            repository.saveAndFlush(new Comic("BD 1", "AUTEUR 1"));
-            repository.saveAndFlush(new Comic("BD 2", "AUTEUR 2"));
-            repository.saveAndFlush(new Comic("BD 3", "AUTEUR 3"));
+            for (int i =0; i < 102; i++)
+                repository.saveAndFlush(new Comic("BD " + i, "AUTEUR " + i));
         }
     }
 
