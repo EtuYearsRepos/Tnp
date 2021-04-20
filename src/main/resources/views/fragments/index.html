@@ -10,6 +10,9 @@
     </header>
     <div th:fragment="center">
         <h1>BODY</h1>
+        <ul>
+            <li th:each="comics : ${comics}" th:text="${comics.title}"></li>
+        </ul>
     </div>
     <footer th:fragment="footer">
         <h1>FOOTER</h1>
