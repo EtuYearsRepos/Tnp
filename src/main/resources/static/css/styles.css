@@ -7,3 +7,8 @@ body
 {
     background-color: blanchedalmond;
 }
+
+.page-item_disabled
+{
+    pointer-events: none;
+}

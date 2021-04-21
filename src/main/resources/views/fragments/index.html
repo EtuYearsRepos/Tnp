@@ -5,17 +5,44 @@
     <meta charset="UTF-8" />
 </head>
 <body>
+
     <header th:fragment="header">
-        <h1>HEADER</h1>
+        <ul>
+            <li> <h1> <a href="">BD BASE</a> </h1> </li>
+            <li> <a href="">Profil</a> </li>
+        </ul>
     </header>
+
+
+    <div th:fragment="nav">
+        <li>
+            <ul>
+                <a href="">Home</a>
+            </ul>
+            <ul>
+                <a href="">Recherche</a>
+            </ul>
+        </li>
+    </div>
+
+
     <div th:fragment="center">
-        <h1>BODY</h1>
+        <h1>BD EN VRAC :)</h1>
         <ul>
             <li th:each="comics : ${comics}" th:text="${comics.title}"></li>
+
+            <!--<ul th:each="i : ${#numbers.sequence(0,comics.totalPages-1)}">
+                <a th:href="@{/(page=${i})}" th:text="${i}" ></a>
+            </ul>
+            <a href="">></a>
+            <a th:href="@{/(page=${i})}"><</a>-->
         </ul>
     </div>
+
     <footer th:fragment="footer">
-        <h1>FOOTER</h1>
+        <h3>BD BASE</h3>
+        <p> Projet étudiant</p>
+        <span> Commandeur Nicolas Ameloot Yoan Delapierre Tristan Martin Folliet </span>
     </footer>
 </body>
 </html>
