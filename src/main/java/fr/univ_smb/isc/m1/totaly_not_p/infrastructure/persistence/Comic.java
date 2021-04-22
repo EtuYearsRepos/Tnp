@@ -39,6 +39,16 @@ public class Comic {
         this.title = title;
     }
 
+    public String getAuthor()
+    {
+        return author;
+    }
+
+    public void setAuthor(String name)
+    {
+        author = name;
+    }
+    
     public String toString() {
         return title + " by " + author;
     }

@@ -36,8 +36,10 @@ public class ComicsService {
     }
 
     //get Comics by Keywords
-    public List<Comic> findByKeyword(String keyword)
+    public List<Comic> findByKeyword(String keyword/*, int page, int range*/)
     {
+        //List<Comic> comics = repository.findByKeyword(keyword);
+        //Page<Comic> test = comics.PageRequest.of(page,range);
         return repository.findByKeyword(keyword);
     }
 }

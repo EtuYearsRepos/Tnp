@@ -3,7 +3,7 @@ package fr.univ_smb.isc.m1.totaly_not_p.adapters.web;
 import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 
-import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -60,16 +60,34 @@ public class TemplateController {
         return "comic_template";
     }
 
+    // @GetMapping(value = "/search")
+    // public String defaultSearch(Model model)
+    // {
+    //     return searchPage(model, null, 1);
+    // }
+
     @GetMapping(value="/search")
-    public String comicPage(Model model, String keyword) {
+    public String searchPage(Model model, String keyword) {
 
         if (keyword != null)
         {
             model.addAttribute("comics", comicsService.findByKeyword(keyword));
         }
         else
-            model.addAttribute("comics", comicsService.allComics());
+        {
+            model.addAttribute("comics", comicsService.allComics());    
+        }
+
+        model.addAttribute("keyword_search", keyword);
 
         return "search_template";
+    }
+
+    @GetMapping(value="/searchFiltered")
+    public String searchPageFiltered(Model model) {
+
+            model.addAttribute("comics", comicsService.allComics());    
+
+        return "search_templateFilter";
     }
 }
