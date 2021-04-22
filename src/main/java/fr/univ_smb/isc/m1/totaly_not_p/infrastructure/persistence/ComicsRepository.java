@@ -12,7 +12,7 @@ public interface ComicsRepository extends JpaRepository<Comic, Long> {
 
     Comic findByTitle(String title);
 
-    @Query(value="SELECT * FROM Comic c WHERE LOWER(c.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(c.author) LIKE LOWER(CONCAT('%', :keyword, '%'))", nativeQuery = true)
+    @Query(value="SELECT * FROM Comic c WHERE c.title ILIKE %:keyword% OR c.author ILIKE %:keyword%", nativeQuery = true)
     List<Comic> findByKeyword(@Param("keyword") String keyword);
 
 }
