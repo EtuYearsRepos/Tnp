@@ -1,48 +1,49 @@
 <!DOCTYPE HTML>
-    <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
     <head th:fragment="head">
-    <link th:href="@{/css/styles.css}" rel="stylesheet">
-    <meta charset="UTF-8" />
-</head>
-<body>
+        <link th:href="@{/css/styles.css}" rel="stylesheet">
+        <meta charset="UTF-8" />
+        <title th:include=":: #title" th:text="${title}">Layout Generic Title</title>
+    </head>
+    <body>
 
-    <header th:fragment="header">
-        <ul>
-            <li> <h1> <a href="">BD BASE</a> </h1> </li>
-            <li> <a href="">Profil</a> </li>
-        </ul>
-    </header>
-
-
-    <div th:fragment="nav">
-        <li>
+        <header th:fragment="header">
             <ul>
-                <a href="">Home</a>
+                <li> <h1> <a href="">BD BASE</a> </h1> </li>
+                <li> <a href="">Profil</a> </li>
             </ul>
+        </header>
+
+
+        <div th:fragment="nav">
+            <li>
+                <ul>
+                    <a th:href="@{/}">Home</a>
+                </ul>
+                <ul>
+                    <a href="">Recherche</a>
+                </ul>
+            </li>
+        </div>
+
+
+        <div th:fragment="center">
+            <h1>BD EN VRAC :)</h1>
             <ul>
-                <a href="">Recherche</a>
+                <li th:each="comics : ${comics}" th:text="${comics.title}"></li>
+
+                <!--<ul th:each="i : ${#numbers.sequence(0,comics.totalPages-1)}">
+                    <a th:href="@{/(page=${i})}" th:text="${i}" ></a>
+                </ul>
+                <a href="">></a>
+                <a th:href="@{/(page=${i})}"><</a>-->
             </ul>
-        </li>
-    </div>
+        </div>
 
-
-    <div th:fragment="center">
-        <h1>BD EN VRAC :)</h1>
-        <ul>
-            <li th:each="comics : ${comics}" th:text="${comics.title}"></li>
-
-            <!--<ul th:each="i : ${#numbers.sequence(0,comics.totalPages-1)}">
-                <a th:href="@{/(page=${i})}" th:text="${i}" ></a>
-            </ul>
-            <a href="">></a>
-            <a th:href="@{/(page=${i})}"><</a>-->
-        </ul>
-    </div>
-
-    <footer th:fragment="footer">
-        <h3>BD BASE</h3>
-        <p> Projet étudiant</p>
-        <span> Commandeur Nicolas Ameloot Yoan Delapierre Tristan Martin Folliet </span>
-    </footer>
-</body>
+        <footer th:fragment="footer">
+            <h3>BD BASE</h3>
+            <p> Projet étudiant</p>
+            <span> Commandeur Nicolas Ameloot Yoan Delapierre Tristan Martin Folliet </span>
+        </footer>
+    </body>
 </html>

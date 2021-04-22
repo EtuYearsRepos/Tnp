@@ -30,4 +30,8 @@ public class ComicsService {
     public Page<Comic> comicsPageRange(int page, int range) {
         return repository.findAll(PageRequest.of(page, range));
     }
+
+    public Comic findById(long id) {
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid comic Id:" + id));
+    }
 }

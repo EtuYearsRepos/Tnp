@@ -43,10 +43,19 @@ public class HomePageController {
         model.addAttribute("totalElements", p.getTotalElements());
         model.addAttribute("numberDisplayPage", NUMBER_DISPLAY_PAGE);
 
+        model.addAttribute("title", "Home");
         model.addAttribute("comics", listComics );
 
         return "base";
     }
     /*comicsService.comicsFromTo(0+10*(page-1), 10*page)*/
-    
+
+    @GetMapping(value="/comic/{id}")
+    public String comicPage(Model model, @PathVariable("id") long id) {
+        Comic c = comicsService.findById(id);
+
+        model.addAttribute("title", c.getTitle());
+        model.addAttribute("comic", c);
+        return "comic_template";
+    }
 }

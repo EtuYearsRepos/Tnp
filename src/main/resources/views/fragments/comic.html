@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <link th:href="@{/css/styles.css}" rel="stylesheet">
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <div th:fragment="center">
+            <ul>
+                <li th:text="${comic.toString()}"></li>
+            </ul>
+        </div>
+    </body>
+</html>
