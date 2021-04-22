@@ -3,6 +3,7 @@ package fr.univ_smb.isc.m1.totaly_not_p.adapters.web;
 import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -15,14 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HomePageController {
+public class TemplateController {
 
     private static final int ELEMENT_PER_PAGE = 10;
     private static final int NUMBER_DISPLAY_PAGE = 4;
 
     private final ComicsService comicsService;
 
-    public HomePageController(ComicsService comicsService) {
+    public TemplateController(ComicsService comicsService) {
         this.comicsService = comicsService;
     }
 
@@ -46,7 +47,7 @@ public class HomePageController {
         model.addAttribute("title", "Home");
         model.addAttribute("comics", listComics );
 
-        return "base";
+        return "home_template";
     }
     /*comicsService.comicsFromTo(0+10*(page-1), 10*page)*/
 
@@ -57,5 +58,18 @@ public class HomePageController {
         model.addAttribute("title", c.getTitle());
         model.addAttribute("comic", c);
         return "comic_template";
+    }
+
+    @GetMapping(value="/search")
+    public String comicPage(Model model, String keyword) {
+
+        if (keyword != null)
+        {
+            model.addAttribute("comics", comicsService.findByKeyword(keyword));
+        }
+        else
+            model.addAttribute("comics", comicsService.allComics());
+
+        return "search_template";
     }
 }

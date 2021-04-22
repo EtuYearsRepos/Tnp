@@ -34,4 +34,10 @@ public class ComicsService {
     public Comic findById(long id) {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid comic Id:" + id));
     }
+
+    //get Comics by Keywords
+    public List<Comic> findByKeyword(String keyword)
+    {
+        return repository.findByKeyword(keyword);
+    }
 }

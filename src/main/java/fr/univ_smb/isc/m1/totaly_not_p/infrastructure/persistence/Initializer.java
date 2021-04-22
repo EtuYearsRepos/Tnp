@@ -21,6 +21,9 @@ class Initializer {
         if (repository.findAll().isEmpty()) {
             for (int i =0; i < 102; i++)
                 repository.saveAndFlush(new Comic("BD " + i, "AUTEUR " + i));
+
+            repository.saveAndFlush(new Comic("Samère", "bidule"));
+            repository.saveAndFlush(new Comic("bite", "FemmeSa"));
         }
     }
 

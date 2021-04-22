@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <link th:href="@{/css/styles.css}" rel="stylesheet">
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <div th:fragment="center">
+
+            <form th:action="@{/search}" method="get">
+                  <input type="text" name="keyword" id="search_keyword" placeholder="Research here">
+                  <button type="submit">Go</button>
+            </form>
+
+            <li th:each="comic : ${comics}" th:text="${comic.toString()}"></li>
+
+        </div>
+    </body>
+</html>
