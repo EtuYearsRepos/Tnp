@@ -1,6 +1,6 @@
 package fr.univ_smb.isc.m1.totaly_not_p.application;
 
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Users;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UsersRepository;
 
 import org.springframework.data.domain.Page;
@@ -12,9 +12,9 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final UserRepository repository;
+    private final UsersRepository repository;
 
-    public UserService(UserRepository repository) {
+    public UserService(UsersRepository repository) {
         this.repository = repository;
     }
 
@@ -22,7 +22,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public UserRepository getRepo()
+    public UsersRepository getRepo()
     {
         return repository;
     }

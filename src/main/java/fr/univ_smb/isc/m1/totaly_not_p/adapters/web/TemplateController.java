@@ -66,6 +66,11 @@ public class TemplateController {
         return searchPage(model, 1, null);
     }
 
+    @GetMapping(value = "/test")
+    public String userPage(){
+        return "test";
+    }
+
     /*@GetMapping(value="/search")
     public String searchPage(Model model, String keyword) {
 
