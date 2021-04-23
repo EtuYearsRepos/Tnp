@@ -60,14 +60,15 @@ public class TemplateController {
         return "comic_template";
     }
 
-    // @GetMapping(value = "/search")
-    // public String defaultSearch(Model model)
-    // {
-    //     return searchPage(model, null, 1);
-    // }
+    @GetMapping(value = "/searchPage")
+    public String defaultSearch(Model model)
+    {
+        return searchPageTest(model, 1, null);
+    }
 
     @GetMapping(value="/search")
     public String searchPage(Model model, String keyword) {
+
 
         if (keyword != null)
         {
@@ -75,12 +76,48 @@ public class TemplateController {
         }
         else
         {
-            model.addAttribute("comics", comicsService.allComics());    
+            model.addAttribute("comics", comicsService.allComics() );  
         }
+
+        return "search_template";
+    }
+
+    @GetMapping(value="/searchPage/{page}")
+    public String searchPageTest(Model model, @PathVariable(value = "page") int page, String keyword) {
+
+
+        if (keyword != null)
+        {
+            int lenghtList = comicsService.findByKeyword(keyword).size();
+            int nbPages = (int) Math.ceil( (double) lenghtList / ELEMENT_PER_PAGE);
+
+            List<Comic> p = comicsService.findByKeywordPage(keyword, page -1, ELEMENT_PER_PAGE);
+
+            model.addAttribute("totalElements", lenghtList);
+            model.addAttribute("totalPages", nbPages);
+
+            model.addAttribute("comics", p);
+        }
+        else
+        {
+            Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
+            List<Comic> listComics = p.getContent();
+    
+            model.addAttribute("totalPages", p.getTotalPages());
+            model.addAttribute("totalElements", p.getTotalElements());
+            
+            model.addAttribute("comics", listComics );  
+        }
+        
+        model.addAttribute("currentPage", page);
+        model.addAttribute("numberDisplayPage", NUMBER_DISPLAY_PAGE);
+        model.addAttribute("title", "Home");
+
+        System.out.println(keyword);
 
         model.addAttribute("keyword_search", keyword);
 
-        return "search_template";
+        return "search_templatePage";
     }
 
     @GetMapping(value="/searchFiltered")

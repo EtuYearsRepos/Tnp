@@ -11,7 +11,6 @@
                   <input type="text" name="keyword" id="search_keyword" placeholder="Research here">
                   <button type="submit">Go</button>
             </form>
-
             <li th:each="comic : ${comics}" th:text="${comic.toString()}"></li>
 
         </div>
@@ -74,6 +73,20 @@
                 }
             </script>
 
+        </div>
+
+        <div th:fragment="centerH">
+            <h1>Search Page test</h1>
+            <form th:action="@{/searchPage/1}" method="get">
+                <input type="text" name="keyword" id="search_keyword" placeholder="Research here">
+                <!--<input th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Research here" th:value="${keyword_search}">-->
+                <button type="submit">Go</button>
+          </form>
+          <li th:each="comic : ${comics}" th:text="${comic.toString()}"></li>
+
+          <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item_disabled'} ">
+              <a th:if="${keyword_search != null}"th:href="@{'/searchPage/' + ${currentPage + 1}(keyword = ${keyword_search})}">Suivant</a>
+          </li>
         </div>
     </body>
 </html>

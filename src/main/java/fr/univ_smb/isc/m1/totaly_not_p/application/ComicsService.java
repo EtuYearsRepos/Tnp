@@ -3,10 +3,12 @@ package fr.univ_smb.isc.m1.totaly_not_p.application;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicsRepository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,10 +38,17 @@ public class ComicsService {
     }
 
     //get Comics by Keywords
-    public List<Comic> findByKeyword(String keyword/*, int page, int range*/)
+    public List<Comic> findByKeyword(String keyword)
     {
-        //List<Comic> comics = repository.findByKeyword(keyword);
-        //Page<Comic> test = comics.PageRequest.of(page,range);
         return repository.findByKeyword(keyword);
     }
+
+    public List<Comic> findByKeywordPage(String keyword, int page, int range)
+    {
+        Pageable pageable = PageRequest.of(page, range);
+        //List <Comic> comics =  repository.findByKeyword(keyword, pageable);
+
+        return repository.findByKeyword(keyword, pageable);
+    }
+
 }
