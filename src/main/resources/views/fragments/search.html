@@ -14,7 +14,10 @@
                 <input th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Research here" th:value="${keyword_search}">
                 <button type="submit">Go</button>
             </form>
-            <li th:each="comic : ${comics}" th:text="${comic.toString()}"></li>
+            
+            <div th:each="comic : ${comics}">
+                <a th:text="${comic.toString()}" th:href="@{'/comic/' + ${comic.getId()}}"></a>
+            </div>
 
             <nav>
                 <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
