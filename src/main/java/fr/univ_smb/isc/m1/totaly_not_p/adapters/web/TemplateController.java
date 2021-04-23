@@ -60,13 +60,13 @@ public class TemplateController {
         return "comic_template";
     }
 
-    @GetMapping(value = "/searchPage")
+    @GetMapping(value = "/search")
     public String defaultSearch(Model model)
     {
         return searchPageTest(model, 1, null);
     }
 
-    @GetMapping(value="/search")
+    /*@GetMapping(value="/search")
     public String searchPage(Model model, String keyword) {
 
 
@@ -80,9 +80,9 @@ public class TemplateController {
         }
 
         return "search_template";
-    }
+    }*/
 
-    @GetMapping(value="/searchPage/{page}")
+    @GetMapping(value="/search/{page}")
     public String searchPageTest(Model model, @PathVariable(value = "page") int page, String keyword) {
 
 
@@ -112,8 +112,6 @@ public class TemplateController {
         model.addAttribute("currentPage", page);
         model.addAttribute("numberDisplayPage", NUMBER_DISPLAY_PAGE);
         model.addAttribute("title", "Home");
-
-        System.out.println(keyword);
 
         model.addAttribute("keyword_search", keyword);
 
