@@ -49,7 +49,6 @@ public class TemplateController {
 
         return "home_template";
     }
-    /*comicsService.comicsFromTo(0+10*(page-1), 10*page)*/
 
     @GetMapping(value="/comic/{id}")
     public String comicPage(Model model, @PathVariable("id") long id) {
@@ -66,25 +65,8 @@ public class TemplateController {
         return searchPage(model, 1, null);
     }
 
-    /*@GetMapping(value="/search")
-    public String searchPage(Model model, String keyword) {
-
-
-        if (keyword != null)
-        {
-            model.addAttribute("comics", comicsService.findByKeyword(keyword));
-        }
-        else
-        {
-            model.addAttribute("comics", comicsService.allComics() );  
-        }
-
-        return "search_template";
-    }*/
-
     @GetMapping(value="/search/{page}")
     public String searchPage(Model model, @PathVariable(value = "page") int page, String keyword) {
-
 
         if (keyword != null)
         {
@@ -115,14 +97,6 @@ public class TemplateController {
 
         model.addAttribute("keyword_search", keyword);
 
-        return "search_templatePage";
-    }
-
-    @GetMapping(value="/searchFiltered")
-    public String searchPageFiltered(Model model) {
-
-            model.addAttribute("comics", comicsService.allComics());    
-
-        return "search_templateFilter";
+        return "search_template";
     }
 }

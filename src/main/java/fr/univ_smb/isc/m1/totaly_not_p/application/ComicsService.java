@@ -43,11 +43,10 @@ public class ComicsService {
         return repository.findByKeyword(keyword);
     }
 
+    //get Comics by Keywords with Page
     public List<Comic> findByKeywordPage(String keyword, int page, int range)
     {
         Pageable pageable = PageRequest.of(page, range);
-        //List <Comic> comics =  repository.findByKeyword(keyword, pageable);
-
         return repository.findByKeyword(keyword, pageable);
     }
 
