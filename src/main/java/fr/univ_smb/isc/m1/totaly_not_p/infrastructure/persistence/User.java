@@ -6,64 +6,57 @@ import java.util.HashSet;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @Column(name="user_id")
+    //@GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id = System.nanoTime();
 
-    private String firstName;
-    private String lastName;
+    private String username;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "User_Comic", 
-        joinColumns = { @JoinColumn(name = "user_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "comic_id") }
-    )
-    private Set<Comic> subscriptions = new HashSet<Comic>();
+    
+    @ManyToMany(mappedBy="subscribers")
+    private HashSet<Comic> subscriptions = new HashSet<Comic>();
+    
 
     public User() {
         // JPA
     }
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String username) {
+        this.username = username;
     }
 
+    @Id
     public Long getId() {
         return id;
     }
 
+    @Id
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String toString() {
-        return firstName + " " + lastName;
+        return username;
     }
 
-    public Set<Comic> getSubscriptions() {
+    
+    public HashSet<Comic> getSubscriptions() {
         return subscriptions;
     }
  
-    public void setSubscriptions(Set<Comic> subscriptions) {
+    public void setSubscriptions(HashSet<Comic> subscriptions) {
         this.subscriptions = subscriptions;
     }
+    
 }

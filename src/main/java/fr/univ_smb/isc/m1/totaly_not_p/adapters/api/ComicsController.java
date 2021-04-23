@@ -1,37 +1,45 @@
 package fr.univ_smb.isc.m1.totaly_not_p.adapters.api;
 
 import fr.univ_smb.isc.m1.totaly_not_p.application.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 public class ComicsController {
 
-    private final ComicsService comicsService;
-
-    public ComicsController(ComicsService comicsService) {
-        this.comicsService = comicsService;
-    }
-
+    @Autowired
+    private ComicsService comicsService;
 
     @GetMapping(value="/comics")
-    public List<String> comics() {
-        return comicsService.allComics()
-                .stream()
-                .map(p-> p.toString())
-                .collect(toList());
+    public ResponseEntity<List<ComicSimpleDTO>> getAllComics() {
+        List<ComicSimpleDTO> comics = comicsService.getAllComics();
+        return new ResponseEntity<>(comics, HttpStatus.OK);
     }
 
-    @GetMapping(value="/users")
-    public List<String> users() {
-        return comicsService.allUsers()
-                .stream()
-                .map(p-> p.toString())
-                .collect(toList());
+    @PostMapping(value="/comic")
+    public ResponseEntity<ComicDTO> createComic(@RequestBody ComicDTO comicDto) {
+        ComicDTO dto = comicsService.addComic(comicDto);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
+
+    @PutMapping(value="/comic/{id}")
+    public ResponseEntity<ComicDTO> updateComic(@PathVariable(name = "id") Long id, @RequestBody ComicDTO comicDTO) {
+        ComicDTO dto = comicsService.updateComic(id, comicDTO);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value="/comic/{id}")
+    public ResponseEntity<String> deleteComic(@PathVariable(name = "id") Long id) {
+        String msg = comicsService.deleteComic(id);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
+    }
+
 
 }
