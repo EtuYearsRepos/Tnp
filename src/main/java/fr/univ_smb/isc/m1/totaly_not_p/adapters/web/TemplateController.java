@@ -63,7 +63,7 @@ public class TemplateController {
     @GetMapping(value = "/search")
     public String defaultSearch(Model model)
     {
-        return searchPageTest(model, 1, null);
+        return searchPage(model, 1, null);
     }
 
     /*@GetMapping(value="/search")
@@ -83,7 +83,7 @@ public class TemplateController {
     }*/
 
     @GetMapping(value="/search/{page}")
-    public String searchPageTest(Model model, @PathVariable(value = "page") int page, String keyword) {
+    public String searchPage(Model model, @PathVariable(value = "page") int page, String keyword) {
 
 
         if (keyword != null)
@@ -111,7 +111,7 @@ public class TemplateController {
         
         model.addAttribute("currentPage", page);
         model.addAttribute("numberDisplayPage", NUMBER_DISPLAY_PAGE);
-        model.addAttribute("title", "Home");
+        model.addAttribute("title", "Search");
 
         model.addAttribute("keyword_search", keyword);
 
