@@ -1,12 +1,6 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.*;
 
 public class ComicDTO {
     private Long id;

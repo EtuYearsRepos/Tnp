@@ -1,7 +1,5 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
-import java.util.Calendar;
-
 public class ComicSimpleDTO {
     private Long id;
     private String title;

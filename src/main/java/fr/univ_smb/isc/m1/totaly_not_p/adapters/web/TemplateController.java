@@ -3,17 +3,12 @@ package fr.univ_smb.isc.m1.totaly_not_p.adapters.web;
 import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.websocket.server.PathParam;
-
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TemplateController {
@@ -30,7 +25,7 @@ public class TemplateController {
     @GetMapping(value="/")
     public String homePage(Model model)
     {
-        return findPage(model, 1);
+        return findPage(model, 1); 
     }
 
     @GetMapping(value="/{page}") // /?page=1  /?page=2 ...   --> comics from 0+range*(index-1) to range*index
@@ -38,6 +33,12 @@ public class TemplateController {
 
         Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
         List<Comic> listComics = p.getContent();
+
+        System.out.println(p.getTotalElements());
+
+        for (Comic comic : listComics) {
+            System.out.println(comic.toString());
+        }
 
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", p.getTotalPages());

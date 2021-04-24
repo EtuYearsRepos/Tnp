@@ -1,9 +1,13 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
-import java.util.Set;
 import java.util.HashSet;
+//import javax.persistence.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")

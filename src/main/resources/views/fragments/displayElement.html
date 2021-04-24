@@ -8,19 +8,19 @@
         <div th:fragment="center">
 
             
+            <!-- List of comics -->
+            <div th:each="comic : ${comics}">
+                <a th:text="${comic.toString()}" th:href="@{'/comic/' + ${comic.getId()}}"></a>
+            </div>
+            
+            <!-- Total of elements -->
+            <div> 
+                Total Rows : [[${totalElements}]]
+            </div>
+            
+            <!-- Page navigation -->
             <div th:if="${totalPages} > 1">
-                <!-- List of comics -->
-                <div th:each="comic : ${comics}">
-                    <a th:text="${comic.toString()}" th:href="@{'/comic/' + ${comic.getId()}}"></a>
-                </div>
-
-                <!-- Total of elements -->
-                <div> 
-                        Total Rows : [[${totalElements}]]
-                </div>
-
-                <!-- Page navigation -->
-                <nav>
+            <nav>
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
                         <a th:href="@{'/' + ${1}}">Début</a>
                     </li>

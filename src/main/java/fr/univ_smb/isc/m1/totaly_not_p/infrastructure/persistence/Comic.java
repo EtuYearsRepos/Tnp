@@ -2,12 +2,8 @@ package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashSet;
-import java.util.List;
 
 @Entity
 public class Comic {
@@ -23,10 +19,10 @@ public class Comic {
     private Integer publicationDate;
     private String status;
 
-    @Lob 
-    @Column(length=10000)
+    //@Column(length=10485760)
+    @Column(name="summary",columnDefinition="LONGTEXT")
     private String summary;
-    @Basic
+    @Basic 
     private ArrayList<String> issues = new ArrayList<>();
     private Integer subNb = 0;
 
