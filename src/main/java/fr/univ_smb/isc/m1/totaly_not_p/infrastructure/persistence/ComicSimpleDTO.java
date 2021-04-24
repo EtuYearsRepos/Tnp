@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class ComicSimpleDTO {
     private Long id;
     private String title;
-    private Calendar date;
+    private Integer publicationDate;
     private Integer subNb;
 
     public void setId(Long id) {
@@ -24,12 +24,12 @@ public class ComicSimpleDTO {
         return title;
     }
 
-    public Calendar getDate() {
-        return date;
+    public Integer getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setPublicationDate(Integer publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     public Integer getSubNb() {

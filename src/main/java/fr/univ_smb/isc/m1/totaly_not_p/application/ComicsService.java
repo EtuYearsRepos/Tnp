@@ -64,6 +64,11 @@ public class ComicsService {
         return mapEntityToDto(comic);
     }
 
+    public ComicDTO getComic(Long id) {
+        Comic c = comicRepository.getOne(id);
+        return mapEntityToDto(c);
+    }
+
     public String deleteComic(Long id) {
         Optional<Comic> c = comicRepository.findById(id);
         if (c.isPresent()) {
@@ -79,7 +84,7 @@ public class ComicsService {
         c.setPublisher(dto.getPublisher());
         c.setArtist(dto.getArtist());
         c.setWriter(dto.getWriter());
-        c.setDate(dto.getDate());
+        c.setPublicationDate(dto.getPublicationDate());
         c.setSummary(dto.getSummary());
         c.setIssues(dto.getIssues());
         c.setStatus(dto.getStatus());
@@ -99,7 +104,7 @@ public class ComicsService {
         responseDTO.setStatus(c.getStatus());
         responseDTO.setSummary(c.getSummary());
         responseDTO.setSubNb(c.getSubNb());
-        responseDTO.setDate(c.getDate());
+        responseDTO.setPublicationDate(c.getPublicationDate());
         responseDTO.setIssues(c.getIssues());
         return responseDTO;
     }
@@ -109,7 +114,7 @@ public class ComicsService {
         responseDTO.setTitle(c.getTitle());
         responseDTO.setId(c.getId());
         responseDTO.setSubNb(c.getSubNb());
-        responseDTO.setDate(c.getDate());
+        responseDTO.setPublicationDate(c.getPublicationDate());
         return responseDTO;
     }
 

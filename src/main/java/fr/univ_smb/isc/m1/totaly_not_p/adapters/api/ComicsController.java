@@ -23,6 +23,12 @@ public class ComicsController {
         return new ResponseEntity<>(comics, HttpStatus.OK);
     }
 
+    @GetMapping(value="/comic/{id}")
+    public ResponseEntity<ComicDTO> getComic(@PathVariable(name = "id") Long id) {
+        ComicDTO dto = comicsService.getComic(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
     @PostMapping(value="/comic")
     public ResponseEntity<ComicDTO> createComic(@RequestBody ComicDTO comicDto) {
         ComicDTO dto = comicsService.addComic(comicDto);

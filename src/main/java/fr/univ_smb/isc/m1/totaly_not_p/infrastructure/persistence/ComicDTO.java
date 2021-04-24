@@ -14,7 +14,7 @@ public class ComicDTO {
     private String publisher;
     private String writer;
     private String artist;
-    private Calendar date;
+    private Integer publicationDate;
     private String status;
     private String summary;
     private Integer subNb;
@@ -60,12 +60,12 @@ public class ComicDTO {
         return writer;
     }
 
-    public Calendar getDate() {
-        return date;
+    public Integer getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setPublicationDate(Integer publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     public void setStatus(String status) {
