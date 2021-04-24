@@ -34,12 +34,6 @@ public class TemplateController {
         Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
         List<Comic> listComics = p.getContent();
 
-        System.out.println(p.getTotalElements());
-
-        for (Comic comic : listComics) {
-            System.out.println(comic.toString());
-        }
-
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", p.getTotalPages());
         model.addAttribute("totalElements", p.getTotalElements());
