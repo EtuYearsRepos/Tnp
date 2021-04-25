@@ -20,7 +20,7 @@
                     </a>
                 </div>
             </div>
-            <nav class="align-self-center m-2">
+            <nav class="align-self-center m-2" th:if="${totalPages > 1}">
                 <ul class="pagination">
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
                         <a class="page-link" th:href="@{'/' + ${1}}">First</a>
