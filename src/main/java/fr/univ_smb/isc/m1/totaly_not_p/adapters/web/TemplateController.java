@@ -2,6 +2,7 @@ package fr.univ_smb.isc.m1.totaly_not_p.adapters.web;
 
 import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserDTO;
 
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public class TemplateController {
     public TemplateController(ComicsService comicsService) {
         this.comicsService = comicsService;
     }
-    
+    /*************************************/
     //Home Page
     @GetMapping(value="/")
     public String homePage(Model model)
@@ -49,7 +50,7 @@ public class TemplateController {
         
         return "home_template";
     }
-    
+    /***********************************/
     //Comic page
     @GetMapping(value="/comic/{id}")
     public String comicPage(Model model, @PathVariable("id") long id) {
@@ -63,29 +64,15 @@ public class TemplateController {
 
         return "comic_template";
     }
-
+    
+    /*********************************/
     //Search Page
     @GetMapping(value = "/search")
     public String defaultSearch(Model model)
     {
         return searchPage(model, 1, null);
     }
-
-    @GetMapping(value = "/profile")
-    public String userPage(){
-        return "profile";
-    }
-
-    @GetMapping(value = "/edit_profile")
-    public String editProfilePage(){
-        return "edit_profile";
-    }
-
-    @GetMapping(value = "/register")
-    public String registerPage(){
-        return "register";
-    }
-
+    
     @GetMapping(value="/search/{page}")
     public String searchPage(Model model, @PathVariable(value = "page") int page, String keyword) {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -122,10 +109,31 @@ public class TemplateController {
         
         return "search_template";
     }
-
+    /************************************************/
+    
     //User Actions
     @GetMapping(value = "/login-form")
     public String login() {
         return "login_template";
     }
+
+    @GetMapping(value = "/register")
+    public String registerPage(Model model){
+
+        UserDTO userDto = new UserDTO();
+        model.addAttribute("user", userDto);
+        return "register";
+    }
+
+    @GetMapping(value = "/profile")
+    public String userPage(){
+        return "profile";
+    }
+    
+    @GetMapping(value = "/edit_profile")
+    public String editProfilePage(){
+        return "edit_profile";
+    }
+
+
 }

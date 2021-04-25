@@ -5,7 +5,7 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicsReposito
 
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserRepository;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
-
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
 
@@ -199,6 +199,39 @@ public class ComicsService {
     {
         Pageable pageable = PageRequest.of(page, range);
         return comicRepository.findByKeyword(keyword, pageable);
+    }
+
+    public String registerUser(UserDTO userDTO)
+    {
+        System.out.println(userDTO.toString());
+
+        if (userDTO.getUsername().equals("anonymousUser") || userDTO.getUsername().equals(null)|| userDTO.getUsername().equals(""))
+        {
+            return "BAD USERNAME";
+        }
+
+        else
+        {
+            User u = userRepository.findByUsername(userDTO.getUsername());
+            if (u != null)
+            {
+                return "USERNAME ALREADY EXISTS";
+            }
+
+            if (!userDTO.getPassword().equals(userDTO.getMatchingPassword()))
+            {
+                return "PASSWORD NOT MACHING";
+            }
+
+        }
+
+        User u = userRepository.saveAndFlush(new User(userDTO.getUsername(), userDTO.getPassword(), "USER"));
+
+        if (u.equals(null))
+        {
+            return "ERROR REGISTERING";
+        }
+        return "REGISTER SUCCESFULL";
     }
 
 }
