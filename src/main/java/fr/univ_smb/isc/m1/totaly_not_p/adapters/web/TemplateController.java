@@ -71,7 +71,37 @@ public class TemplateController {
         return searchPage(model, 1, null);
     }
 
-    
+    @GetMapping(value = "/profile")
+    public String userPage(){
+        return "profile";
+    }
+
+    @GetMapping(value = "/edit_profile")
+    public String editProfilePage(){
+        return "edit_profile";
+    }
+
+    @GetMapping(value = "/register")
+    public String registerPage(){
+        return "register";
+    }
+
+    /*@GetMapping(value="/search")
+    public String searchPage(Model model, String keyword) {
+
+
+        if (keyword != null)
+        {
+            model.addAttribute("comics", comicsService.findByKeyword(keyword));
+        }
+        else
+        {
+            model.addAttribute("comics", comicsService.allComics() );  
+        }
+
+        return "search_template";
+    }*/
+
     @GetMapping(value="/search/{page}")
     public String searchPage(Model model, @PathVariable(value = "page") int page, String keyword) {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

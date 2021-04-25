@@ -33,10 +33,10 @@
                     <input class="form-control me-2" th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Title / Author ..." th:value="${keyword_search}">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
-                <a th:if="${isConnected}" class="btn btn-outline-info ml-5" href="">Profil</a> 
+                <a th:if="${isConnected}" class="btn btn-outline-info ml-5" href="/profile">Profil</a> 
                 <a th:if="${isConnected}" class="btn btn-outline-info ml-5" href="/logout">Logout</a> 
                 <a th:unless="${isConnected}" class="btn btn-outline-info ml-5" href="/login-form">Login</a> 
-                <a th:unless="${isConnected}" class="btn btn-outline-info ml-5" href="">Create account</a> 
+                <a th:unless="${isConnected}" class="btn btn-outline-info ml-5" href="/register">Create account</a> 
             </div>
             <!-- <div class="container-fluid d-flex flex-row align-items-center justify-content-end">
                 <h1 class="h4 mb-0 pr-3 text-capitalize align-right"><a class="text-white" href="">Profil</a></h1>
