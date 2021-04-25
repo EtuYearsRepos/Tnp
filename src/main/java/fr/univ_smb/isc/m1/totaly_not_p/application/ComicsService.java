@@ -120,7 +120,7 @@ public class ComicsService {
         Comic c = comicRepository.getOne(id);
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (username != null && c != null) {
+        if (username != null && !username.equals("anonymousUser") && c != null) {
             System.out.println("Adding comic " + id + " to user " + username);
             User user = userRepository.findByUsername(username);
             user.addSubscription(c);
@@ -133,10 +133,27 @@ public class ComicsService {
     }
 
     @Transactional
+    public Boolean removeComicSubscriptionFromUser(Long id) {
+        Comic c = comicRepository.getOne(id);
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (username != null && !username.equals("anonymousUser") && c != null) {
+            System.out.println("Removing comic " + id + " from user " + username);
+            User user = userRepository.findByUsername(username);
+            user.removeSubscription(c);
+            userRepository.saveAndFlush(user);
+        } else {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Transactional
     public List<ComicSimpleDTO> getUserSubscriptions() {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<ComicSimpleDTO> comicDTOs = new ArrayList<>();
-        if(username != null) {
+        if(username != null && !username.equals("anonymousUser")) {
             User user = userRepository.findByUsername(username);
             HashSet<Comic> comics = user.getSubscriptions();
             

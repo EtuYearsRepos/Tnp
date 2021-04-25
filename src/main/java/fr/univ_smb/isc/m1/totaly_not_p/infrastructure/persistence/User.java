@@ -73,9 +73,14 @@ public class User {
         };
     }
 
-    public void removeSubscrption(Comic comic) {
-        if (this.subscriptions.remove(comic)) {
-            comic.setSubNb(comic.getSubNb() - 1);
+    public void removeSubscription(Comic comic) {
+
+        for (Comic c : this.subscriptions) {
+            if (c.getId().longValue() == comic.getId().longValue()) {
+                this.subscriptions.remove(c);
+                comic.setSubNb(comic.getSubNb() - 1);
+                return;
+            }
         }
     }
     

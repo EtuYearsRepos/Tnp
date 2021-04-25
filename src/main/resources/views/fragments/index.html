@@ -10,7 +10,12 @@
         <header th:fragment="header">
             <ul>
                 <li> <h1> <a href="">BD BASE</a> </h1> </li>
-                <li> <a href="">Profil</a> </li>
+                <li>
+                     <a th:if="${isConnected}" href="">Profil</a> 
+                     <a th:if="${isConnected}" href="/logout">Logout</a> 
+                     <a th:unless="${isConnected}" href="/login-form">Login</a> 
+                     <a th:unless="${isConnected}" href="">Create account</a> 
+                </li>
             </ul>
         </header>
 

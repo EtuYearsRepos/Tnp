@@ -43,6 +43,13 @@ public class Comic implements Serializable {
         // JPA
     }
 
+    /*
+    @Override
+    public boolean equals(Object obj) {
+        return this.id.equals(((Comic) obj).getId());
+    }
+    */
+
     @Id
     public Long getId() {
         return id;

@@ -56,6 +56,14 @@ public class ComicsController {
         return new ResponseEntity<>(success, HttpStatus.OK);
     }
 
+    
+    @GetMapping(value="/user/unsubscribe/{id}")
+    public ResponseEntity<Boolean> unsubscribe(@PathVariable(name = "id") Long id) {
+        Boolean success = comicsService.removeComicSubscriptionFromUser(id);
+        return new ResponseEntity<>(success, HttpStatus.OK);
+    }
+    
+
     @GetMapping(value="/user/subscriptions")
     public ResponseEntity<List<ComicSimpleDTO>> getSubscriptions() {
         List<ComicSimpleDTO> comics = comicsService.getUserSubscriptions();
