@@ -10,12 +10,15 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -112,6 +115,41 @@ public class ComicsService {
         responseDTO.setSubNb(c.getSubNb());
         responseDTO.setPublicationDate(c.getPublicationDate());
         return responseDTO;
+    }
+
+    @Transactional
+    public Boolean addComicSubscriptionToUser(Long id) {
+        Comic c = comicRepository.getOne(id);
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (username != null && c != null) {
+            System.out.println("Adding comic " + id + " to user " + username);
+            User user = userRepository.findByUsername(username);
+            user.addSubscription(c);
+            userRepository.saveAndFlush(user);
+        } else {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Transactional
+    public List<ComicSimpleDTO> getUserSubscriptions() {
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<ComicSimpleDTO> comicDTOs = new ArrayList<>();
+        if(username != null) {
+            User user = userRepository.findByUsername(username);
+            HashSet<Comic> comics = user.getSubscriptions();
+            
+            for (Comic c : comics) {
+                if (c != null) {
+                    comicDTOs.add(mapEntityToSimpleDto(c));
+                }
+            }
+            
+        }
+        return comicDTOs;
     }
 
     public List<Comic> allComics() {

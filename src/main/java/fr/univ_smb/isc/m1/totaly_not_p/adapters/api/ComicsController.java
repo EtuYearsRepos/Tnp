@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,6 +29,16 @@ public class ComicsController {
         return new ResponseEntity<>(comics, HttpStatus.OK);
     }
 
+    @GetMapping(value="/api/users")
+    public ResponseEntity<List<String>> getAllUsers() {
+        
+        List<String> usernames = new ArrayList<>();
+        comicsService.allUsers().forEach(user -> {
+            usernames.add(user.getUsername());
+        });
+        return new ResponseEntity<>(usernames, HttpStatus.OK);
+    }
+
     @GetMapping(value="/api/comic/{id}")
     public ResponseEntity<ComicDTO> getComic(@PathVariable(name = "id") Long id) {
         ComicDTO dto = comicsService.getComic(id);
@@ -37,6 +49,18 @@ public class ComicsController {
     public ResponseEntity<ComicDTO> createComic(@RequestBody ComicDTO comicDto) {
         ComicDTO dto = comicsService.addComic(comicDto);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value="/user/subscribe/{id}")
+    public ResponseEntity<Boolean> subscribe(@PathVariable(name = "id") Long id) {
+        Boolean success = comicsService.addComicSubscriptionToUser(id);
+        return new ResponseEntity<>(success, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/user/subscriptions")
+    public ResponseEntity<List<ComicSimpleDTO>> getSubscriptions() {
+        List<ComicSimpleDTO> comics = comicsService.getUserSubscriptions();
+        return new ResponseEntity<>(comics, HttpStatus.OK);
     }
 
     @PutMapping(value="/api/comic/{id}")

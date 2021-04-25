@@ -2,11 +2,17 @@ package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
 import javax.persistence.*;
 
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 @Entity
-public class Comic {
+//@Transactional
+public class Comic implements Serializable {
+
+    private static final long serialVersionUID = -905369955137519862L;
 
     @Id
     @Column(name="comic_id")
@@ -20,7 +26,7 @@ public class Comic {
     private String status;
 
     //@Column(length=10485760)
-    @Column(name="summary",columnDefinition="LONGTEXT")
+    //@Column(name="summary",columnDefinition="LONGTEXT")
     private String summary;
     @Basic 
     private ArrayList<String> issues = new ArrayList<>();
@@ -31,8 +37,7 @@ public class Comic {
     //private byte[] thumbnail;
 
     
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name="user_comic", joinColumns= {@JoinColumn(name="comic_id")},  inverseJoinColumns= {@JoinColumn(name="user_id")})
+    @ManyToMany(mappedBy="subscriptions", fetch = FetchType.EAGER)
     private HashSet<User> subscribers = new HashSet<User>();
     
 
@@ -147,13 +152,13 @@ public class Comic {
 
     public void addSubscriber(User user) {
         this.subscribers.add(user);
-        user.getSubscriptions().add(this);
+        //user.getSubscriptions().add(this);
         this.subNb = subscribers.size();
     }
 
     public void removeSubscriber(User user) {
         this.subscribers.remove(user);
-        user.getSubscriptions().remove(this);
+        //user.getSubscriptions().remove(this);
         this.subNb = subscribers.size();
     }
     

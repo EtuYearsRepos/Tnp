@@ -60,6 +60,11 @@ public class TemplateController {
         return searchPage(model, 1, null);
     }
 
+    @GetMapping(value = "/login-form")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping(value="/search/{page}")
     public String searchPage(Model model, @PathVariable(value = "page") int page, String keyword) {
 

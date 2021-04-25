@@ -1,27 +1,31 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
+import java.util.Set;
+import java.io.Serializable;
 import java.util.HashSet;
-//import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usertable")
+@Transactional
 public class User {
 
     @Id
-    @Column(name="user_id")
+    @Column(name="id")
     //@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id = System.nanoTime();
 
     private String username;
+    private String password;
+    private String role;
 
     
-    @ManyToMany(mappedBy="subscribers")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name="usertable_comic", joinColumns= {@JoinColumn(name="user_id")},  inverseJoinColumns= {@JoinColumn(name="comic_id")})
     private HashSet<Comic> subscriptions = new HashSet<Comic>();
     
 
@@ -29,8 +33,10 @@ public class User {
         // JPA
     }
 
-    public User(String username) {
+    public User(String username, String password, String role) {
         this.username = username;
+        this.password = new BCryptPasswordEncoder().encode(password);
+        this.role = role;
     }
 
     @Id
@@ -62,5 +68,32 @@ public class User {
     public void setSubscriptions(HashSet<Comic> subscriptions) {
         this.subscriptions = subscriptions;
     }
+
+    public void addSubscription(Comic comic) {
+        if (this.subscriptions.add(comic)) {
+            comic.setSubNb(comic.getSubNb() + 1);
+        };
+    }
+
+    public void removeSubscrption(Comic comic) {
+        if (this.subscriptions.remove(comic)) {
+            comic.setSubNb(comic.getSubNb() - 1);
+        }
+    }
     
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

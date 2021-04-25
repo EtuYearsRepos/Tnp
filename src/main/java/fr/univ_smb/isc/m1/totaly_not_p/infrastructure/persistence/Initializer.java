@@ -21,6 +21,8 @@ class Initializer {
         comicRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
 
+        userRepository.saveAndFlush(new User("user", "password", "USER"));
+
         /*if (repository.findAll().isEmpty()) {
             for (int i =0; i < 102; i++)
                 repository.saveAndFlush(new Comic("BD " + i, "AUTEUR " + i));
