@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;

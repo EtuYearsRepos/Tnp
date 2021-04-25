@@ -1,7 +1,5 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
-import java.util.Set;
-import java.io.Serializable;
 import java.util.HashSet;
 
 import javax.persistence.*;

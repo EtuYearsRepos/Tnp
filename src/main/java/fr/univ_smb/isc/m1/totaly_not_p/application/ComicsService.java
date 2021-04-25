@@ -11,14 +11,12 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 

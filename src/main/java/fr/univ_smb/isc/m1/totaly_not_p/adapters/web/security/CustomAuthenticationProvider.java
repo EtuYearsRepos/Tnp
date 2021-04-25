@@ -13,7 +13,8 @@ import org.springframework.stereotype.Component;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Locale;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
