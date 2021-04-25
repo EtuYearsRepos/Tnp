@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class TemplateController {
 
-    private static final int ELEMENT_PER_PAGE = 10;
+    private static final int ELEMENT_PER_PAGE = 20;
     private static final int NUMBER_DISPLAY_PAGE = 4;
 
     private final ComicsService comicsService;
@@ -33,7 +33,6 @@ public class TemplateController {
     @GetMapping(value="/{page}") // /?page=1  /?page=2 ...   --> comics from 0+range*(index-1) to range*index
     public String findPage(Model model, @PathVariable(value = "page") int page) {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(username);
         
         Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
         List<Comic> listComics = p.getContent();

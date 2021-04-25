@@ -2,53 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:fragment="head">
         <link th:href="@{/css/styles.css}" rel="stylesheet">
+        <!-- BOOSTRAP -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- JQUERY -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <meta charset="UTF-8" />
         <title th:include=":: #title" th:text="${title}">Layout Generic Title</title>
     </head>
     <body>
-
-        <header th:fragment="header">
-            <ul>
-                <li> <h1> <a href="">BD BASE</a> </h1> </li>
-                <li>
-                     <a th:if="${isConnected}" href="">Profil</a> 
-                     <a th:if="${isConnected}" href="/logout">Logout</a> 
-                     <a th:unless="${isConnected}" href="/login-form">Login</a> 
-                     <a th:unless="${isConnected}" href="">Create account</a> 
+        <header th:fragment="header" class="navbar navbar-expand-lg navbar-dark bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
+            <a class="navbar-brand" th:href="@{/}">TnP</a>
+            <!-- <div class="container-fluid d-flex align-items-center">
+                <h1 class="h3 text-white mb-0 text-capitalize">Totaly not P</h1>
+            </div> -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" th:href="@{/}">Home</a>
                 </li>
             </ul>
+            <div class="container-fluid d-flex flex-row align-items-center justify-content-end">
+                <!-- <form class="d-flex mx-3">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+                <form class="d-flex mx-3" th:action="@{/search/1}" method="get">
+                    <input class="form-control me-2" th:if="${keyword_search == null}" type="text" name="keyword" id="search_keyword" placeholder="Title / Author ...">
+                    <input class="form-control me-2" th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Title / Author ..." th:value="${keyword_search}">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <a th:if="${isConnected}" class="btn btn-outline-info ml-5" href="">Profil</a> 
+                <a th:if="${isConnected}" class="btn btn-outline-info ml-5" href="/logout">Logout</a> 
+                <a th:unless="${isConnected}" class="btn btn-outline-info ml-5" href="/login-form">Login</a> 
+                <a th:unless="${isConnected}" class="btn btn-outline-info ml-5" href="">Create account</a> 
+            </div>
+            <!-- <div class="container-fluid d-flex flex-row align-items-center justify-content-end">
+                <h1 class="h4 mb-0 pr-3 text-capitalize align-right"><a class="text-white" href="">Profil</a></h1>
+            </div> -->
         </header>
 
-
-        <div th:fragment="nav">
-            <li>
-                <ul>
-                    <a th:href="@{/}">Home</a>
-                </ul>
-                <ul>
-                    <a th:href="@{/search}">Search</a>
-                </ul>
-            </li>
-        </div>
-
-
-        <div th:fragment="center">
-            <h1>BD EN VRAC :)</h1>
-            <ul>
-                <li th:each="comics : ${comics}" th:text="${comics.title}"></li>
-
-                <!--<ul th:each="i : ${#numbers.sequence(0,comics.totalPages-1)}">
-                    <a th:href="@{/(page=${i})}" th:text="${i}" ></a>
-                </ul>
-                <a href="">></a>
-                <a th:href="@{/(page=${i})}"><</a>-->
-            </ul>
-        </div>
-
-        <footer th:fragment="footer">
-            <h3>BD BASE</h3>
-            <p> Projet étudiant</p>
-            <span> Commandeur Nicolas Ameloot Yoan Delapierre Tristan Martin Folliet </span>
+        <footer th:fragment="footer" class="text-center text-light bg-dark py-2 border-bottom border-dark">
+            <h3>TnP</h3>
+            <p> © Commandeur Nicolas, Ameloot Yoan, Delapierre Tristan, Martin Folliet </p>
         </footer>
     </body>
 </html>

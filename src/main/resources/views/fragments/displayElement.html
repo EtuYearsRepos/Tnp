@@ -5,36 +5,34 @@
         <meta charset="UTF-8" />
     </head>
     <body>
-        <div th:fragment="center">
-
-            
-            <!-- List of comics -->
-            <div th:each="comic : ${comics}">
-                <a th:text="${comic.toString()}" th:href="@{'/comic/' + ${comic.getId()}}"></a>
+        <div class="flex-grow-1 d-flex flex-column" th:fragment="center" xmlns:th="http://www.thymeleaf.org">
+            <div class="mx-5 row justify-content-start flex-grow-1">
+                <div class="my-3 h-100 col-3"th:each="comic : ${comics}">
+                    <a class="card p-0 text-decoration-none" th:href="@{'/comic/' + ${comic.getId()}}">
+                        <div class="card-header">
+                            <h5 class="card-title m-0" th:text="${comic.toString()}" ></h5>
+                        </div>
+                        <div class="card-body align-items-center">
+                            <p class="card-link badge badge-pill badge-info m-0">genre 1</p>
+                            <p class="card-link badge badge-pill badge-info m-0">genre 2</p>
+                            <p class="card-link badge badge-pill badge-info m-0">genre 3</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-            
-            <!-- Total of elements -->
-            <div> 
-                Total Rows : [[${totalElements}]]
-            </div>
-            
-            <!-- Page navigation -->
-            <div th:if="${totalPages} > 1">
-            <nav>
+            <nav class="align-self-center m-2">
+                <ul class="pagination">
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:href="@{'/' + ${1}}">Début</a>
+                        <a class="page-link" th:href="@{'/' + ${1}}">First</a>
                     </li>
-
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:href="@{'/' + ${currentPage - 1}}">Précédent</a>
+                        <a class="page-link" th:href="@{'/' + ${currentPage - 1}}">Previous</a>
                     </li>
-
-
                     <th:block th:if="${totalPages <= numberDisplayPage}">
-                        <li th:each="i: ${#numbers.sequence(1, totalPages)}" 
-                            th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                            <a th:href="@{'/' + ${i}}">[[${i}]]</a>
-                        </li>
+                    <li th:each="i: ${#numbers.sequence(1, totalPages)}" 
+                        th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
+                        <a class="page-link" th:href="@{'/' + ${i}}">[[${i}]]</a>
+                    </li>
                     </th:block>
 
                     <th:block th:if="${totalPages > numberDisplayPage}">
@@ -42,72 +40,42 @@
                         <th:block th:if="${currentPage <= numberDisplayPage / 2 || currentPage > (totalPages - numberDisplayPage / 2 ) - 1}">
                             <li th:each="i: ${#numbers.sequence(1, numberDisplayPage / 2)}" 
                                 th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                                <a th:href="@{'/' + ${i}}">[[${i}]]</a>
+                                <a class="page-link" th:href="@{'/' + ${i}}">[[${i}]]</a>
                             </li>
 
-                            <a th:href="@{'/' + ${(numberDisplayPage /2) +1}}">...</a>
+                            <a class="page-link" th:href="@{'/' + ${(numberDisplayPage /2) +1}}">...</a>
 
                             <li th:each="i: ${#numbers.sequence(totalPages - ((numberDisplayPage / 2 ) - 1), totalPages)}" 
                             th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                            <a th:href="@{'/' + ${i}}">[[${i}]]</a>
+                                <a class="page-link" th:href="@{'/' + ${i}}">[[${i}]]</a>
                             </li>
                         </th:block>
 
                         <th:block th:if="${currentPage > numberDisplayPage / 2 && currentPage < (totalPages - numberDisplayPage / 2 )}">
 
                             <th:block th:if="${(currentPage - ((numberDisplayPage /2) +1)) > 0 }">
-                                <a th:href="@{'/' + ${(currentPage - ((numberDisplayPage /2) +1))}}">...</a>
+                                <a class="page-link" th:href="@{'/' + ${(currentPage - ((numberDisplayPage /2) +1))}}">...</a>
                             </th:block>
 
                             <li th:each="i: ${#numbers.sequence(currentPage - (numberDisplayPage / 2), currentPage + (numberDisplayPage / 2))}" 
                                 th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                                <a th:href="@{'/' + ${i}}">[[${i}]]</a>
+                                <a class="page-link" th:href="@{'/' + ${i}}">[[${i}]]</a>
                             </li>
 
-                            <a th:href="@{'/' + ${(currentPage + ((numberDisplayPage /2) +1))}}">...</a>
+                            <a class="page-link" th:href="@{'/' + ${(currentPage + ((numberDisplayPage /2) +1))}}">...</a>
 
                         </th:block>
                     </th:block>
 
                     <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:href="@{'/' + ${currentPage + 1}}">Suivant</a>
+                        <a class="page-link" th:href="@{'/' + ${currentPage + 1}}">Next</a>
                     </li>
 
                     <li th:class="${currentPage < totalPages  ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:href="@{'/' + ${totalPages}}">Fin</a>
+                        <a class="page-link" th:href="@{'/' + ${totalPages}}">Last</a>
                     </li>
-                </nav>
-
-                    <!-- Le comportement de cette section est étrange pour Premier et Précédent, commenté et non supprimé aux cas ou
-                    <div>
-                        <a th:if="${currentPage != 1}" th:href="@{'/' + ${1}}">Premier</a>
-                        <span th:unless="${currentPage != 1}"></span>Premier</span>
-                    </div>
-
-                    <div>
-                        <a th:if="${currentPage != 1}" th:href="@{'/' + ${currentPage - 1}}">Précédent</a>
-                        <span th:unless="${currentPage != 1}"></span>Précédent</span>
-                    </div>
-                    <div>
-                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                            <a th:if="${currentPage != i}" th:href="@{'/' + ${i}}">[[${i}]]</a>
-                            <span th:unless="${currentPage != i}">[[${i}]]</span> 
-                            &nbsp; &nbsp;
-                        </span>
-                    </div>
-
-                    <div>
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/' + ${currentPage + 1}}">Suivant</a>
-                        <span th:unless="${currentPage < totalPages}">Suivant</span>
-                    </div>
-
-                    <div>
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/' + ${totalPages}}">Fin</a>
-                        <span th:unless="${currentPage < totalPages}">Fin</span>
-                    </div>
-                    -->
-            </div>
-
+                </ul>
+            </nav>
         </div>
     </body>
 </html>
