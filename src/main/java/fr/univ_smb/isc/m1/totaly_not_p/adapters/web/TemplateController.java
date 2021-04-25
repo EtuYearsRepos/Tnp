@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TemplateController {
 
-    private static final int ELEMENT_PER_PAGE = 10;
+    private static final int ELEMENT_PER_PAGE = 20;
     private static final int NUMBER_DISPLAY_PAGE = 4;
 
     private final ComicsService comicsService;

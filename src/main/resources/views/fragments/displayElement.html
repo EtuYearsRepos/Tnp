@@ -6,20 +6,21 @@
     </head>
     <body>
         <div class="flex-grow-1 d-flex flex-column" th:fragment="center" xmlns:th="http://www.thymeleaf.org">
-            <div class="row justify-content-center flex-grow-1">
-                <div class="card m-2 col-3 h-100" th:each="comic : ${comics}">
-                    <!-- <div class="card m-3"> -->
-                        <div class="card-body">
-                            <a class="card-title" th:text="${comic.toString()}" th:href="@{'/comic/' + ${comic.getId()}}"></a>
-                            <br>
-                            <p class="card-text badge badge-pill badge-info mb-0">genre 1</p>
-                            <p class="card-text badge badge-pill badge-info mb-0">genre 2</p>
-                            <p class="card-text badge badge-pill badge-info mb-0">genre 3</p>
+            <div class="mx-5 row justify-content-start flex-grow-1">
+                <div class="my-3 h-100 col-3"th:each="comic : ${comics}">
+                    <a class="card p-0 text-decoration-none" th:href="@{'/comic/' + ${comic.getId()}}">
+                        <div class="card-header">
+                            <h5 class="card-title m-0" th:text="${comic.toString()}" ></h5>
                         </div>
-                    <!-- </div> -->
+                        <div class="card-body align-items-center">
+                            <p class="card-link badge badge-pill badge-info m-0">genre 1</p>
+                            <p class="card-link badge badge-pill badge-info m-0">genre 2</p>
+                            <p class="card-link badge badge-pill badge-info m-0">genre 3</p>
+                        </div>
+                    </a>
                 </div>
             </div>
-            <nav class="align-self-center">
+            <nav class="align-self-center m-2">
                 <ul class="pagination">
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
                         <a class="page-link" th:href="@{'/' + ${1}}">First</a>
