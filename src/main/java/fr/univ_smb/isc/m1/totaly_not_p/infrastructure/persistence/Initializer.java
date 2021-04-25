@@ -7,24 +7,29 @@ import javax.annotation.PostConstruct;
 @Service
 class Initializer {
 
-    private final ComicsRepository repository;
+    private final ComicsRepository comicRepository;
+    private final UserRepository userRepository;
 
-    public Initializer(ComicsRepository repository) {
-        this.repository = repository;
+    public Initializer(ComicsRepository comicRepository, UserRepository userRepository) {
+        this.comicRepository = comicRepository;
+        this.userRepository = userRepository;
     }
 
     @PostConstruct
     public void initialize() {
 
-        repository.deleteAllInBatch();
+        comicRepository.deleteAllInBatch();
+        userRepository.deleteAllInBatch();
 
-        if (repository.findAll().isEmpty()) {
+        userRepository.saveAndFlush(new User("user", "password", "USER"));
+
+        /*if (repository.findAll().isEmpty()) {
             for (int i =0; i < 102; i++)
                 repository.saveAndFlush(new Comic("BD " + i, "AUTEUR " + i));
 
             repository.saveAndFlush(new Comic("Samère", "bidule"));
             repository.saveAndFlush(new Comic("bite", "FemmeSa"));
-        }
+        }*/
     }
 
 }

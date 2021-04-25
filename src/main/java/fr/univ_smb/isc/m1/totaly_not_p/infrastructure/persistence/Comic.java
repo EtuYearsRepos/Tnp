@@ -1,32 +1,54 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 @Entity
-public class Comic {
+//@Transactional
+public class Comic implements Serializable {
+
+    private static final long serialVersionUID = -905369955137519862L;
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @Column(name="comic_id")
+    private Long id = System.nanoTime();
 
     private String title;
-    private String author;
+    private String publisher;
+    private String writer;
+    private String artist;
+    private Integer publicationDate;
+    private String status;
+
+    //@Column(length=10485760)
+    //@Column(name="summary",columnDefinition="LONGTEXT")
+    private String summary;
+    @Basic 
+    private ArrayList<String> issues = new ArrayList<>();
+    private Integer subNb = 0;
+
+    //@Column(name="thumbnail")
+    //@JsonIgnore
+    //private byte[] thumbnail;
+
+    
+    @ManyToMany(mappedBy="subscriptions", fetch = FetchType.EAGER)
+    private HashSet<User> subscribers = new HashSet<User>();
+    
 
     public Comic() {
         // JPA
     }
 
-    public Comic(String title, String author) {
-        this.title = title;
-        this.author = author;
-    }
-
+    @Id
     public Long getId() {
         return id;
     }
 
+    @Id
     public void setId(Long id) {
         this.id = id;
     }
@@ -39,17 +61,121 @@ public class Comic {
         this.title = title;
     }
 
-    public String getAuthor()
-    {
-        return author;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public void setAuthor(String name)
-    {
-        author = name;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public Integer getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(Integer publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setIssues(ArrayList<String> issues) {
+        this.issues = issues;
+    }
+
+    public ArrayList<String> getIssues() {
+        return issues;
+    }
+
+    public Integer getSubNb() {
+        return subNb;
+    }
+
+    //Shouldn't be used
+    public void setSubNb(Integer subNb) {
+        this.subNb = subNb;
+    } 
+
+
+    /*
+    @Lob
+    @Column(name = "THUMBNAIL", length = 1111111, nullable = true)
+    public byte[] getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+    */
+
+    
+    public HashSet<User> getSubscribers() {
+        return subscribers;
+    }
+    public void setSubscribers(HashSet<User> subscribers) {
+        this.subscribers = subscribers;
+        this.subNb = subscribers.size();
+    }
+
+    public void addSubscriber(User user) {
+        this.subscribers.add(user);
+        //user.getSubscriptions().add(this);
+        this.subNb = subscribers.size();
+    }
+
+    public void removeSubscriber(User user) {
+        this.subscribers.remove(user);
+        //user.getSubscriptions().remove(this);
+        this.subNb = subscribers.size();
     }
     
+    public void removeSubscribers() {
+        for (User u : this.subscribers) {
+            this.removeSubscriber(u);
+        }
+        this.subNb = subscribers.size();
+    }
+
     public String toString() {
-        return title + " by " + author;
+        
+        /*
+        String subs = new String();
+        for (User u : subscribers) {
+            subs += u.getUsername();
+        }
+        */
+        
+        return id + " : " + title + " by " + publisher;
     }
 }
