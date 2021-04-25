@@ -5,48 +5,71 @@
         <meta charset="UTF-8" />
     </head>
     <body>
-
-        <div th:fragment="center">
-            <h1>Search Page test</h1>
-            
-            <form th:action="@{/search/1}" method="get">
-                <input th:if="${keyword_search == null}" type="text" name="keyword" id="search_keyword" placeholder="Research here">
-                <input th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Research here" th:value="${keyword_search}">
-                <button type="submit">Go</button>
-            </form>
-            
-            <div th:each="comic : ${comics}">
-                <a th:text="${comic.toString()}" th:href="@{'/comic/' + ${comic.getId()}}"></a>
+        <div class="flex-grow-1 d-flex flex-column" th:fragment="center" xmlns:th="http://www.thymeleaf.org">
+            <div class="align-self-center m-3 col-12 col-md-10 col-lg-8">
+                <form class="card card-sm rounded-pill" th:action="@{/search/1}" method="get">
+                    <div class="m-2 row no-gutters align-items-center">
+                        <div class="col">
+                            <input class="form-control form-control-lg border-0 rounded-pill" th:if="${keyword_search == null}" type="text" name="keyword" id="search_keyword" placeholder="Search here">
+                            <input class="form-control form-control-lg border-0 rounded-pill" th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Search here" th:value="${keyword_search}">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-lg btn-success rounded-pill" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+                <th:block th:if="${totalElements > 0}">
+                    <div class="my-2 mx-4 text-start"> 
+                        Comics found : [[${totalElements}]]
+                    </div>
+                </th:block>
             </div>
 
-            <div th:if="${totalPages} > 1">
-                <nav>
+            
+
+            <div class="mx-5 row justify-content-start flex-grow-1">
+                <div class="my-3 h-100 col-3"th:each="comic : ${comics}">
+                    <a class="card p-0 text-decoration-none" th:href="@{'/comic/' + ${comic.getId()}}">
+                        <div class="card-header">
+                            <h5 class="card-title m-0" th:text="${comic.toString()}" ></h5>
+                        </div>
+                        <div class="card-body align-items-center">
+                            <p class="card-link badge badge-pill badge-info m-0">genre 1</p>
+                            <p class="card-link badge badge-pill badge-info m-0">genre 2</p>
+                            <p class="card-link badge badge-pill badge-info m-0">genre 3</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <nav class="align-self-center m-2" th:if="${totalPages} > 1">
+                <ul class="pagination">
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${1}(keyword = ${keyword_search})}">Début</a>
-                        <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${1}}">Début</a>
+                        <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${1}(keyword = ${keyword_search})}">Début</a>
+                        <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${1}}">Début</a>
                     </li>
-
+    
                     <li th:class="${currentPage > 1 ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${currentPage - 1}(keyword = ${keyword_search})}">Précédent</a>
-                        <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${currentPage - 1}}">Précédent</a>
+                        <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${currentPage - 1}(keyword = ${keyword_search})}">Précédent</a>
+                        <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${currentPage - 1}}">Précédent</a>
                     </li>
-
-
+    
+    
                     <th:block th:if="${totalPages <= numberDisplayPage}">
                         <li th:each="i: ${#numbers.sequence(1, totalPages)}" 
                             th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                            <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
-                            <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
+                            <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
+                            <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
                         </li>
                     </th:block>
                     
                     <th:block th:if="${totalPages > numberDisplayPage}">
-
+    
                         <th:block th:if="${currentPage <= numberDisplayPage / 2 || currentPage > (totalPages - numberDisplayPage / 2 ) - 1}">
                             <li th:each="i: ${#numbers.sequence(1, numberDisplayPage / 2)}" 
                                 th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                                <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
-                                <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
+                                <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
+                                <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
                             </li>
                         
                             <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${(numberDisplayPage /2) +1}(keyword = ${keyword_search})}">...</a>
@@ -54,41 +77,41 @@
                         
                             <li th:each="i: ${#numbers.sequence(totalPages - ((numberDisplayPage / 2 ) - 1), totalPages)}" 
                             th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                                <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
-                                <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
+                                <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
+                                <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
                             </li>
                         </th:block>
-
+    
                         <th:block th:if="${currentPage > numberDisplayPage / 2 && currentPage < (totalPages - numberDisplayPage / 2 )}">
-
+    
                             <th:block th:if="${(currentPage - ((numberDisplayPage /2) +1)) > 0 }">
-                                <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage - ((numberDisplayPage /2) +1))}(keyword = ${keyword_search})}">...</a>
-                                <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage - ((numberDisplayPage /2) +1))}}">...</a>
+                                <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage - ((numberDisplayPage /2) +1))}(keyword = ${keyword_search})}">...</a>
+                                <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage - ((numberDisplayPage /2) +1))}}">...</a>
                             </th:block>
-
+    
                             <li th:each="i: ${#numbers.sequence(currentPage - (numberDisplayPage / 2), currentPage + (numberDisplayPage / 2))}" 
                                 th:class="${currentPage != i ? 'page-item' : 'page-item_disabled'} ">
-                                <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
-                                <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
+                                <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${i}(keyword = ${keyword_search})}">[[${i}]]</a>
+                                <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${i}}">[[${i}]]</a>
                             </li>
-
-                            <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage + ((numberDisplayPage /2) +1))}(keyword = ${keyword_search})}">...</a>
-                            <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage + ((numberDisplayPage /2) +1))}}">...</a>
-
+    
+                            <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage + ((numberDisplayPage /2) +1))}(keyword = ${keyword_search})}">...</a>
+                            <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${(currentPage + ((numberDisplayPage /2) +1))}}">...</a>
+    
                         </th:block>
                     </th:block>
                 
                     <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${currentPage + 1}(keyword = ${keyword_search})}">Suivant</a>
-                        <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${currentPage + 1}}">Suivant</a>
+                        <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${currentPage + 1}(keyword = ${keyword_search})}">Suivant</a>
+                        <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${currentPage + 1}}">Suivant</a>
                     </li>
-
+    
                     <li th:class="${currentPage < totalPages  ? 'page-item' : 'page-item_disabled'} ">
-                        <a th:if="${keyword_search != null}"th:href="@{'/search/' + ${totalPages}(keyword = ${keyword_search})}">Fin</a>
-                        <a th:unless="${keyword_search != null}"th:href="@{'/search/' + ${totalPages}}">Fin</a>
+                        <a class="page-link" th:if="${keyword_search != null}"th:href="@{'/search/' + ${totalPages}(keyword = ${keyword_search})}">Fin</a>
+                        <a class="page-link" th:unless="${keyword_search != null}"th:href="@{'/search/' + ${totalPages}}">Fin</a>
                     </li>
-                </nav>
-            </div>
+                </ul>
+            </nav>
         </div>
     </body>
 </html>
