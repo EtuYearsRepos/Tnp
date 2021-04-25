@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Your Profile</title>
+        <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    </head>
+    <body>
+        <form action="" method="get" class="container">
+            <div class="formulaire">
+            <h1>Your Profile </h1>
+            <div class="champs">
+                <div>
+                    <input type="text" name="psuedo" id="pseudo" placeholder="Your Pseudo">
+                </div>
+
+                <div>
+                    <input type="text" name="firstname" id="firstname" placeholder="Last Name">
+                </div>  
+
+                <div>
+                    <input type="text" name="lastname" id="lastname" placeholder="Last Name">
+                </div>  
+
+                <div>
+                    <input type="email" name="email" id="email" placeholder="Email">
+                </div>
+
+                <div>
+                    <input type="password" name="password" id="password" placeholder="Password">
+                </div>
+
+                <div>
+                    <input type="password" name="chgpassword" id="chgpassword" placeholder="New Password">
+                </div>            
+
+                <div>
+                    <input type="password" name="chgpasswordconf" id="chgpasswordconf" placeholder="New Password Confirmation">
+                </div>
+            </div>
+
+            <div class="bouton">
+                <input type="submit" value="Change">
+            </div>
+        </div> 
+        </form>
+        <a th:href="@{/profile}">Retour</a>
+    </body>
+</html>

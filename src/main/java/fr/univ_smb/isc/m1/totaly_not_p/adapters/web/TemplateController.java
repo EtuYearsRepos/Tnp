@@ -66,9 +66,14 @@ public class TemplateController {
         return searchPage(model, 1, null);
     }
 
-    @GetMapping(value = "/test")
+    @GetMapping(value = "/profile")
     public String userPage(){
-        return "test";
+        return "profile";
+    }
+
+    @GetMapping(value = "/edit_profile")
+    public String editProfilePage(){
+        return "edit_profile";
     }
 
     /*@GetMapping(value="/search")
