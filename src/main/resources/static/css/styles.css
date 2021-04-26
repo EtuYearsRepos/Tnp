@@ -3,12 +3,11 @@
     padding: 0px;
 }
 
-body
-{
-    background-color: blanchedalmond;
-}
-
 .page-item_disabled
 {
     pointer-events: none;
+}
+
+.background-opacity {
+    opacity:0.2;
 }

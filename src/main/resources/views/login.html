@@ -1,0 +1,50 @@
+<!-- Il existe deux type de fonctions avec les fragments:
+   - replace, qui remplace le header par le fragment appelé
+   - insert, qui ajoute en plus le fragment appelé
+
+   plus d'infos sur:
+   https://www.baeldung.com/spring-thymeleaf-fragments
+-->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="fragments/index.html :: head">
+        <title id="title"></title>
+    </head>
+    <body class="bg-light d-flex flex-column" style="min-height: 100vh;">
+        <div class="flex-grow-1 row justify-content-center w-100">
+            <div class="col-6 align-self-center">
+                <div class="card bg-dark text-white">
+                    <img th:src="@{images/form_background.jpg}" class="background-opacity card-img" alt="form background">
+                    <div class="d-flex align-content-center align-items-center justify-content-center card-img-overlay">
+                        <div class="m-3">
+                            <div class="card-title">
+                                <h1 class="h3 font-weight-normal text-capitalize text-center">log in</h1>
+                            </div>
+                            <div class="card-subtitle text-center">
+                                You don't have an account ?<br>
+                                <a class="badge bg-danger text-white text-decoration-none font-weight-bold" th:href="@{/register}">Sign up !</a>
+                            </div>
+                        </div>
+                        <form class="m-3" name='f' action="perform_login" method="POST">
+                            <div class="card-body">
+                                <div class="form-group mb-1">
+                                    <label class="mb-0" for="username">Username</label>
+                                    <input class="form-control" type='text' name='username' id="username" placeholder="Username"/>
+                                </div>
+                                <div class="form-group mb-1">
+                                    <label class="mb-0" for="username">Password</label>
+                                    <input class="form-control" type='password' name='password' id="username" placeholder="Password"/>
+                                </div>
+                                <input class="btn btn-lg btn-danger float-right mt-2" name="submit" type="submit" value="Log in"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-img-overlay p-0 m-3" style="width: 5%; height: 5%;">
+                        <a th:href="@{/}"><img class="w-100" th:src="@{images/home.svg}" alt="home"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

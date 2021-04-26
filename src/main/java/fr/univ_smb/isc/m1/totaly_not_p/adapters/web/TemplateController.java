@@ -112,26 +112,30 @@ public class TemplateController {
     /************************************************/
     
     //User Actions
-    @GetMapping(value = "/login-form")
-    public String login() {
-        return "login_template";
+    @GetMapping(value = "/login")
+    public String login(Model model) {
+        model.addAttribute("title", "Login");
+        return "login";
     }
 
     @GetMapping(value = "/register")
     public String registerPage(Model model){
 
         UserDTO userDto = new UserDTO();
+        model.addAttribute("title", "Register");
         model.addAttribute("user", userDto);
         return "register";
     }
 
     @GetMapping(value = "/profile")
-    public String userPage(){
+    public String userPage(Model model){
+        model.addAttribute("title", "Your profile");
         return "profile";
     }
     
     @GetMapping(value = "/edit_profile")
-    public String editProfilePage(){
+    public String editProfilePage(Model model){
+        model.addAttribute("title", "Profile edition");
         return "edit_profile";
     }
 
