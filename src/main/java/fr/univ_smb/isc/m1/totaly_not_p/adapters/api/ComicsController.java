@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserDTO;
 
 import org.springframework.web.bind.annotation.*;

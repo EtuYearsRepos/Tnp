@@ -10,6 +10,7 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -180,8 +181,11 @@ public class ComicsService {
         return comicRepository;
     }
 
-    public Page<Comic> comicsPageRange(int page, int range) {
-        return comicRepository.findAll(PageRequest.of(page, range));
+    public Page<Comic> comicsPageRange(int page, int range, String sortby, boolean ascending) {
+        if (ascending)
+            return comicRepository.findAll(PageRequest.of(page, range, Sort.by(sortby).ascending()));
+        else
+            return comicRepository.findAll(PageRequest.of(page, range, Sort.by(sortby).descending()));
     }
 
     public Comic findById(long id) {

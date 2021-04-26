@@ -35,7 +35,7 @@ public class TemplateController {
     public String findPage(Model model, @PathVariable(value = "page") int page) {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
-        Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
+        Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE, "title", true);
         List<Comic> listComics = p.getContent();
 
         model.addAttribute("currentPage", page);
@@ -91,7 +91,7 @@ public class TemplateController {
         }
         else
         {
-            Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
+            Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE, "title", false);
             List<Comic> listComics = p.getContent();
             
             model.addAttribute("totalPages", p.getTotalPages());
