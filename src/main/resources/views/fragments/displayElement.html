@@ -9,8 +9,9 @@
             <div class="mx-5 row justify-content-start flex-grow-1">
                 <div class="my-3 h-100 col-3"th:each="comic : ${comics}">
                     <a class="card p-0 text-decoration-none" th:href="@{'/comic/' + ${comic.getId()}}">
+                        <img class="card-img-top" th:src="@{images/comic.png}" alt="comic logo">
                         <div class="card-header">
-                            <h5 class="card-title m-0" th:text="${comic.toString()}" ></h5>
+                            <h5 class="card-title m-0" th:text="${comic.getTitle()}" ></h5>
                         </div>
                         <div class="card-body align-items-center">
                             <p class="card-link badge badge-pill badge-info m-0">genre 1</p>
