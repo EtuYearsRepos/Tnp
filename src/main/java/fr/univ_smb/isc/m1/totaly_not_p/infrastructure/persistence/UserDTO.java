@@ -3,12 +3,12 @@ package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 import org.springframework.lang.NonNull;
 
 public class UserDTO {
-    @NonNull
+    /*@NonNull
     private String firstName;
 
     @NonNull
     private String lastName;
-
+*/
     @NonNull
     private String username;
 
@@ -22,7 +22,7 @@ public class UserDTO {
     private String email;
     
 
-    public String getFirstName()
+    /*public String getFirstName()
     {
         return firstName;
     }
@@ -42,7 +42,7 @@ public class UserDTO {
     {
         lastName = ln;
     }
-
+*/
 
     public String getUsername()
     {
