@@ -1,4 +1,4 @@
-package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
+package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -2,7 +2,7 @@ package fr.univ_smb.isc.m1.totaly_not_p.adapters.web;
 
 import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserDTO;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserDTO;
 
 import java.util.List;
 import org.springframework.data.domain.Page;

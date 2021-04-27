@@ -1,4 +1,4 @@
-package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
+package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user;
 
 import java.util.HashSet;
 
@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 
 @Entity
 @Table(name = "usertable")

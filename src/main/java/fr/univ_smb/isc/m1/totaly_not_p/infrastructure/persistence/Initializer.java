@@ -2,6 +2,9 @@ package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
 import org.springframework.stereotype.Service;
 
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserRepository;
+
 import javax.annotation.PostConstruct;
 
 @Service
