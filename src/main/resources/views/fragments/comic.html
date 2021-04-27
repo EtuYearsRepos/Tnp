@@ -17,30 +17,31 @@
                                 <h1 class="card-title text-dark" th:text="${comic.getTitle()}" ></h1>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Publisher : </span>
-                                    <span class="card-text text-dark" th:text="${comic.getPublisher()}" ></span>
+                                    <span class="card-text badge badge-secondary text-light" th:text="${comic.getPublisher()}" ></span>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Artist : </span>
-                                    <span class="card-text text-dark" th:text="${comic.getArtist()}" ></span>
+                                    <span class="card-text badge badge-secondary text-light" th:text="${comic.getArtist()}" ></span>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Writer : </span>
-                                    <span class="card-text text-dark" th:text="${comic.getWriter()}" ></span>
+                                    <span class="card-text badge badge-secondary text-light" th:text="${comic.getWriter()}" ></span>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Publication date : </span>
-                                    <span class="card-text text-dark" th:text="${comic.getPublicationDate()}" ></span>
+                                    <span class="card-text badge badge-secondary text-light" th:text="${comic.getPublicationDate()}" ></span>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Status : </span>
-                                    <span class="card-text text-dark" th:text="${comic.getStatus()}" ></span>
+                                    <span class="card-text badge badge-success text-light" th:text="${comic.getStatus()}" ></span>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Subs : </span>
-                                    <span class="card-text text-dark" th:text="${comic.getSubNb()}" ></span>
+                                    <span class="card-text badge badge-danger text-light" th:text="${comic.getSubNb()}" ></span>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Summary : </span>
+                                    <br>
                                     <span class="card-text text-dark" th:text="${comic.getSummary()}" ></span>
                                 </div>
                             </div>
