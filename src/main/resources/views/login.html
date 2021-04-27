@@ -1,11 +1,3 @@
-<!-- Il existe deux type de fonctions avec les fragments:
-   - replace, qui remplace le header par le fragment appelé
-   - insert, qui ajoute en plus le fragment appelé
-
-   plus d'infos sur:
-   https://www.baeldung.com/spring-thymeleaf-fragments
--->
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:insert="fragments/index.html :: head">
@@ -18,7 +10,7 @@
                     <img th:src="@{images/form_background.jpg}" class="background-opacity card-img" alt="form background">
                     <div class="d-flex align-content-center align-items-center justify-content-center card-img-overlay">
                         <div class="m-3">
-                            <div class="card-title">
+                            <div class="card-title my-3">
                                 <h1 class="h3 font-weight-normal text-capitalize text-center">log in</h1>
                             </div>
                             <div class="card-subtitle text-center">
@@ -33,8 +25,8 @@
                                     <input class="form-control" type='text' name='username' id="username" placeholder="Username"/>
                                 </div>
                                 <div class="form-group mb-1">
-                                    <label class="mb-0" for="username">Password</label>
-                                    <input class="form-control" type='password' name='password' id="username" placeholder="Password"/>
+                                    <label class="mb-0" for="password">Password</label>
+                                    <input class="form-control" type='password' name='password' id="password" placeholder="Password"/>
                                 </div>
                                 <input class="btn btn-lg btn-danger float-right mt-2" name="submit" type="submit" value="Log in"/>
                             </div>
