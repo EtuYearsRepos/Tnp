@@ -11,7 +11,7 @@
     <head th:insert="fragments/index.html :: head">
         <title id="title" th:text="${title}"></title>
     </head>
-    <body class="d-flex flex-column" style="min-height: 100vh;">
+    <body class="bg-darker d-flex flex-column" style="min-height: 100vh;">
         <header th:replace="fragments/index.html :: header"></header>
         <div class="d-flex flex-column flex-grow-1 bg-body" th:insert="fragments/comic.html :: center"></div>
         <footer th:replace="fragments/index.html :: footer"></footer>

@@ -11,3 +11,7 @@
 .background-opacity {
     opacity:0.2;
 }
+
+.bg-darker {
+    background-color: #232629;
+}
