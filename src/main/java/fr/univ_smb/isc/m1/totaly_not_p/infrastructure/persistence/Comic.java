@@ -154,26 +154,26 @@ public class Comic implements Serializable {
     }
     public void setSubscribers(HashSet<User> subscribers) {
         this.subscribers = subscribers;
-        this.subNb = subscribers.size();
+        //this.subNb = subscribers.size();
     }
 
     public void addSubscriber(User user) {
         this.subscribers.add(user);
         //user.getSubscriptions().add(this);
-        this.subNb = subscribers.size();
+        //this.subNb = subscribers.size();
     }
 
     public void removeSubscriber(User user) {
         this.subscribers.remove(user);
         //user.getSubscriptions().remove(this);
-        this.subNb = subscribers.size();
+        //this.subNb = subscribers.size();
     }
     
     public void removeSubscribers() {
         for (User u : this.subscribers) {
             this.removeSubscriber(u);
         }
-        this.subNb = subscribers.size();
+        //this.subNb = subscribers.size();
     }
 
     public String toString() {

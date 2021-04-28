@@ -38,7 +38,10 @@
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Subs : </span>
                                     <span class="card-text badge badge-info text-light" th:text="${comic.getSubNb()}" ></span>
-                                    <i class="h4 align-middle bi bi-bookmark-heart-fill text-danger" id="fav-button"></i>
+                                    <div>
+                                        <a th:if="${isSubscribed}" th:href="@{'/api/user/unsubscribe/' + ${comic.getId()} + '/comic'}"><i class="h4 bi bi-bookmark-heart-fill text-danger" id="fav-button"></i></a>
+                                        <a th:unless="${isSubscribed}"th:href="@{'/api/user/subscribe/' + ${comic.getId()}}"><i class="h4 bi bi-bookmark-heart text-dark" id="fav-button"></i></a>
+                                    </div>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Summary : </span>

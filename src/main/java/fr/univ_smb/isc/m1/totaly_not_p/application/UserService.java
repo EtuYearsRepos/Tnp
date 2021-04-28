@@ -41,6 +41,9 @@ public class UserService {
             System.out.println("Adding comic " + id + " to user " + username);
             User user = userRepository.findByUsername(username);
             user.addSubscription(c);
+
+            Comic comic = comicRepository.findById(c.getId()).get();
+            comic.addSubscriber(user);
             userRepository.saveAndFlush(user);
         } else {
             return false;
@@ -59,6 +62,9 @@ public class UserService {
             User user = userRepository.findByUsername(username);
             user.removeSubscription(c);
             userRepository.saveAndFlush(user);
+
+            Comic comic = comicRepository.findById(c.getId()).get();
+            comic.removeSubscriber(user);
         } else {
             return false;
         }

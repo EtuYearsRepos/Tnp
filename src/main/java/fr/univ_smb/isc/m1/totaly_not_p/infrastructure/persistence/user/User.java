@@ -1,5 +1,6 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 @Entity
 @Table(name = "usertable")
 @Transactional
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name="id")
@@ -73,8 +74,8 @@ public class User {
 
     public void addSubscription(Comic comic) {
         if (this.subscriptions.add(comic)) {
-            comic.setSubNb(comic.getSubNb() + 1);
-        };
+            comic.setSubNb(comic.getSubNb()+1);
+        }
     }
 
     public void removeSubscription(Comic comic) {
@@ -82,8 +83,7 @@ public class User {
         for (Comic c : this.subscriptions) {
             if (c.getId().longValue() == comic.getId().longValue()) {
                 this.subscriptions.remove(c);
-                comic.setSubNb(comic.getSubNb() - 1);
-                return;
+                comic.setSubNb(comic.getSubNb()-1);
             }
         }
     }

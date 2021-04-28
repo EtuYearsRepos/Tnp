@@ -68,11 +68,29 @@ public class TemplateController {
     public String comicPage(Model model, @PathVariable("id") long id) {
         Comic c = comicsService.findById(id);
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User u;
+
+        boolean found = false;
+        if (!username.equals("anonymousUser") && !username.equals(null))
+        {
+            u = userRepository.findByUsername(username);
+            HashSet<Comic> h = u.getSubscriptions();
+            for (Comic comic : h) {
+                if (comic.getId().longValue() == comic.getId().longValue())
+                {
+                    found = true;
+                    break;
+                }
+            }
+            model.addAttribute("user", u);
+
+        }
 
         model.addAttribute("title", c.getTitle());
         model.addAttribute("comic", c);
-
         model.addAttribute("isConnected", !username.equals("anonymousUser"));
+        model.addAttribute("isSubscribed", found);
+
 
         return "comic_template";
     }
@@ -149,6 +167,9 @@ public class TemplateController {
             model.addAttribute("favs", favorites);
         }
         model.addAttribute("title", username);
+
+        model.addAttribute("isConnected", !username.equals("anonymousUser"));
+
         return "profile_template";
     }
     

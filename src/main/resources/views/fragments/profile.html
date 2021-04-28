@@ -36,7 +36,7 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <th:block th:each="fav : ${favs}">
-                                            <i class="bi bi-bookmark-heart-fill text-danger"></i>
+                                            <a th:href="@{'/api/user/unsubscribe/' + ${fav.getId()} + '/profile'}"><i class="h4 bi bi-bookmark-heart-fill text-danger" id="fav-button"></i></a>
                                             <a class="card-link text-capitalize m-0" th:href="@{'/comic/' + ${fav.getId()}}" th:text="${fav.getTitle()}"></a>
                                         </th:block>
                                     </li>

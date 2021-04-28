@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +37,22 @@ public class UserController {
     @GetMapping(value="api/user/subscribe/{id}")
     public ResponseEntity<Boolean> subscribe(@PathVariable(name = "id") Long id) {
         Boolean success = userService.addComicSubscriptionToUser(id);
-        return new ResponseEntity<>(success, HttpStatus.OK);
+        //return new ResponseEntity<>(success, HttpStatus.OK);
+
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/comic/" + id)).build();
     }
 
-    @GetMapping(value="api/user/unsubscribe/{id}")
-    public ResponseEntity<Boolean> unsubscribe(@PathVariable(name = "id") Long id) {
+    @GetMapping(value="api/user/unsubscribe/{id}/{from}")
+    public ResponseEntity<Boolean> unsubscribe(@PathVariable(name = "id") Long id, @PathVariable(name = "from") String from) {
         Boolean success = userService.removeComicSubscriptionFromUser(id);
-        return new ResponseEntity<>(success, HttpStatus.OK);
+
+        if (from.equals("profile"))
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/profile")).build();
+
+        else if (from.equals("comic"))
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/comic/" + id)).build();
+
+        return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
     
     @GetMapping(value="api/user/subscriptions")
