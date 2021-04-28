@@ -15,6 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+
 import javax.annotation.Resource;
 
 import java.util.ArrayList;
@@ -124,4 +127,32 @@ public class UserService {
         return "REGISTER SUCCESFULL";
     }
 
-}
+    public void save(UserDTO userDTO)
+    {
+        userRepository.saveAndFlush(new User(userDTO.getUsername(), userDTO.getPassword(), "USER"));
+    }
+
+
+    public void validate(Object o, Errors errors) {
+        UserDTO user = (UserDTO) o;
+
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+        if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
+            errors.rejectValue("username", "Size.userForm.username");
+        }
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            errors.rejectValue("username", "Duplicate.userForm.username");
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
+        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
+            errors.rejectValue("password", "Size.userForm.password");
+        }
+        
+        if (!user.getMatchingPassword().equals(user.getPassword())) {
+            errors.rejectValue("matchingPassword", "Diff.userForm.passwordConfirm");
+        }
+    }
+
+} 

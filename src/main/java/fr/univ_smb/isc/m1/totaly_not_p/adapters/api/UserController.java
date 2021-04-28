@@ -54,13 +54,4 @@ public class UserController {
         List<ComicSimpleDTO> comics = userService.getUserSubscriptions();
         return new ResponseEntity<>(comics, HttpStatus.OK);
     }
-
-    @PostMapping(value = "/register/confirmation")
-    public ModelAndView registerUser(@ModelAttribute("user") UserDTO userDTO,
-    HttpServletRequest request,
-    Errors errors) {
-      
-        userService.registerUser(userDTO);
-        return new ModelAndView("index", "user", userDTO);
-    }
 }
