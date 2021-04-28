@@ -3,7 +3,7 @@ package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 public class ComicSimpleDTO {
     private Long id;
     private String title;
-    private Integer publicationDate;
+    private String publicationDate;
     private Integer subNb;
 
     public void setId(Long id) {
@@ -22,11 +22,11 @@ public class ComicSimpleDTO {
         return title;
     }
 
-    public Integer getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Integer publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 

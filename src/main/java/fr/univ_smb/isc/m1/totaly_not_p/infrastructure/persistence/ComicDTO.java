@@ -8,7 +8,7 @@ public class ComicDTO {
     private String publisher;
     private String writer;
     private String artist;
-    private Integer publicationDate;
+    private String publicationDate;
     private String status;
     private String summary;
     private Integer subNb;
@@ -54,11 +54,11 @@ public class ComicDTO {
         return writer;
     }
 
-    public Integer getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Integer publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 

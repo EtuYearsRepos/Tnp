@@ -22,7 +22,7 @@ public class Comic implements Serializable {
     private String publisher;
     private String writer;
     private String artist;
-    private Integer publicationDate;
+    private String publicationDate;
     private String status;
 
     //@Column(length=10485760)
@@ -94,11 +94,11 @@ public class Comic implements Serializable {
         return writer;
     }
 
-    public Integer getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Integer publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 
