@@ -168,7 +168,7 @@ public class TemplateController {
 
         userService.save(userDTO);
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }
