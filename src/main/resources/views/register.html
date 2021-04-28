@@ -18,36 +18,30 @@
                                 <a class="badge bg-danger text-white text-decoration-none font-weight-bold" th:href="@{/login}">Log in !</a>
                             </div>
                         </div>
-                        <form class="m-3" action="/register/confirmation" th:object="${user}" method="POST">
+                        <form class="m-3" action="/register" th:object="${user}" method="POST">
                             <div class="card-body py-1">
-                                <div class="form-group mb-1">
-                                    <label class="mb-0" for="firstName">First name</label>
-                                    <input class="form-control" type='text' th:field="*{firstName}" id="firstName" placeholder="First name"/>
-                                    <p th:each="error: ${#fields.errors('firstName')}" 
-                                        th:text="${error}">Validation error</p>
-                                </div>
-                                <div class="form-group mb-1">
-                                    <label class="mb-0" for="lastName">Last name</label>
-                                    <input class="form-control" type='text' th:field="*{lastName}" id="lastName" placeholder="Last name"/>
-                                    <p th:each="error : ${#fields.errors('lastName')}" 
-                                        th:text="${error}">Validation error</p>
-                                </div>
                                 <div class="form-group mb-1">
                                     <label class="mb-0" for="email">Email</label>
                                     <input class="form-control" type='email' th:field="*{email}" id="email" placeholder="Email"/>
-                                    <p th:each="error : ${#fields.errors('email')}" 
+                                    <p class="p-1 m-0 alert alert-danger" th:each="error : ${#fields.errors('email')}" 
                                         th:text="${error}">Validation error</p>
                                 <div class="form-group mb-1">
                                     <label class="mb-0" for="username">Username</label>
                                     <input class="form-control" type='text' th:field="*{username}" id="username" placeholder="Username"/>
-                                    <p th:each="error : ${#fields.errors('username')}" 
+                                    <p class="p-1 m-0 alert alert-danger" th:each="error : ${#fields.errors('username')}" 
                                         th:text="${error}">Validation error</p>
                                 </div>
                                 </div>
                                 <div class="form-group mb-1">
                                     <label class="mb-0" for="password">Password</label>
                                     <input class="form-control" type='password' th:field="*{password}" id="password" placeholder="Password"/>
-                                    <p th:each="error : ${#fields.errors('password')}" 
+                                    <p class="p-1 m-0 alert alert-danger" th:each="error : ${#fields.errors('password')}" 
+                                        th:text="${error}">Validation error</p>
+                                </div>
+                                <div class="form-group mb-1">
+                                    <label class="mb-0" for="passwordconf">Password confirmation</label>
+                                    <input class="form-control" type='password' th:field="*{matchingPassword}" id="passwordconf" placeholder="Confirm password" required/>
+                                    <p class="p-1 m-0 alert alert-danger" th:each="error : ${#fields.errors('matchingPassword')}" 
                                         th:text="${error}">Validation error</p>
                                 </div>
                                 <input class="btn btn-lg btn-danger float-right mt-2" name="submit" type="submit" value="Register"/>

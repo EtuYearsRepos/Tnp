@@ -4,7 +4,11 @@ import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
 import fr.univ_smb.isc.m1.totaly_not_p.application.UserService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserDTO;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserRepository;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,9 +28,11 @@ public class TemplateController {
 
     private final ComicsService comicsService;
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public TemplateController(ComicsService comicsService, UserService userService) {
+    public TemplateController(ComicsService comicsService, UserRepository userRepository, UserService userService) {
         this.comicsService = comicsService;
+        this.userRepository = userRepository;
         this.userService = userService;
     }
     /*************************************/
@@ -135,22 +141,21 @@ public class TemplateController {
 
     @GetMapping(value = "/profile")
     public String userPage(Model model){
-        model.addAttribute("title", "Your profile");
-        return "profile";
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (username != null && !username.equals("anonymousUser")) {
+            User user = userRepository.findByUsername(username);
+            List<Comic> favorites = new ArrayList<Comic>(user.getSubscriptions());
+            model.addAttribute("current_user", user);
+            model.addAttribute("favs", favorites);
+        }
+        model.addAttribute("title", username);
+        return "profile_template";
     }
     
     @GetMapping(value = "/edit_profile")
     public String editProfilePage(Model model){
         model.addAttribute("title", "Profile edition");
         return "edit_profile";
-    }
-
-    @GetMapping(value = "/register")
-    public String registerPage(Model model){
-
-        UserDTO userDto = new UserDTO();
-        model.addAttribute("user", userDto);
-        return "register";
     }
 
     @PostMapping("/register")

@@ -10,11 +10,11 @@
                 <div class="card m-3">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-6 align-self-center">
                                 <img class="w-100" th:src="@{../images/comic.png}" alt="comic logo">
                             </div>
                             <div class="col-6 align-self-center">
-                                <h1 class="card-title text-dark" th:text="${comic.getTitle()}" ></h1>
+                                <span class="h1 card-title text-dark" th:text="${comic.getTitle()}" ></span>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Publisher : </span>
                                     <span class="card-text badge badge-secondary text-light" th:text="${comic.getPublisher()}" ></span>
@@ -37,7 +37,8 @@
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Subs : </span>
-                                    <span class="card-text badge badge-danger text-light" th:text="${comic.getSubNb()}" ></span>
+                                    <span class="card-text badge badge-info text-light" th:text="${comic.getSubNb()}" ></span>
+                                    <i class="h4 align-middle bi bi-bookmark-heart-fill text-danger" id="fav-button"></i>
                                 </div>
                                 <div class="w-100">
                                     <span class="font-weight-bold text-dark">Summary : </span>
@@ -54,7 +55,6 @@
                             <h3 class="text-dark">Issues</h3>
                         </div>
                         <div class="" th:each="issue : ${comic.getIssues}">
-                            <!-- <a class="card-link text-capitalize m-0" th:href="" th:text="${issue}" ></a> -->
                             <p class="card-text text-dark text-capitalize m-0" th:text="${issue}" ></p>
                         </div>
                     </div>

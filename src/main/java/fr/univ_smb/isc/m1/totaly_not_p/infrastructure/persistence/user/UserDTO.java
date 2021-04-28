@@ -2,15 +2,13 @@ package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user;
 
 public class UserDTO {
 
-    private String firstName;
-    private String lastName;
     private String username;
     private String password;
     private String matchingPassword;
     private String email;
     
 
-    public String getFirstName()
+    /*public String getFirstName()
     {
         return firstName;
     }
@@ -30,7 +28,7 @@ public class UserDTO {
     {
         lastName = ln;
     }
-
+*/
 
     public String getUsername()
     {
