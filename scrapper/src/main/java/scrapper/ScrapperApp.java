@@ -15,10 +15,10 @@ import scrapper.readcomiconline.ReadComicOnlineScrapper;
 public class ScrapperApp {
 
     public static WebClient client;
-    public static final String TARGET_API_URL = "http://localhost:8080/admin/api/comic";
+    public static final String TARGET_API_URL = "https://totaly-not-p.oups.net/admin/api/comic";
 
     final static String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
-    final static String LOGIN_ACTION_URL = "http://localhost:8080/perform_login";
+    final static String LOGIN_ACTION_URL = "https://totaly-not-p.oups.net/perform_login";
     final static String USERNAME = "admin";
     final static String PASSWORD = "admin";
 
