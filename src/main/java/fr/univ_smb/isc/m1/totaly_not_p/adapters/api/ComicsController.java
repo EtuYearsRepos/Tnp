@@ -34,7 +34,7 @@ public class ComicsController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @PostMapping(value="/api/comic")
+    @PostMapping(value="/admin/api/comic")
     public ResponseEntity<ComicDTO> createComic(@RequestBody ComicDTO comicDto) {
         ComicDTO dto = comicsService.addComic(comicDto);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);

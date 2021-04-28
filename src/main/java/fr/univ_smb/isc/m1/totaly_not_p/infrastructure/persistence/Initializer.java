@@ -25,6 +25,7 @@ class Initializer {
         userRepository.deleteAllInBatch();
 
         userRepository.saveAndFlush(new User("user", "password", "USER"));
+        userRepository.saveAndFlush(new User("admin", "admin", "ADMIN"));
 
         /*if (repository.findAll().isEmpty()) {
             for (int i =0; i < 102; i++)
