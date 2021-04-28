@@ -35,9 +35,17 @@
                             <h5 class="card-title text-dark m-0" th:text="${comic.getTitle()}" ></h5>
                         </div>
                         <div class="card-body align-items-center">
-                            <p class="card-link badge badge-pill badge-info m-0">genre 1</p>
-                            <p class="card-link badge badge-pill badge-info m-0">genre 2</p>
-                            <p class="card-link badge badge-pill badge-info m-0">genre 3</p>
+                            <div class="card-link badge badge-pill badge-success m-0">
+                                <span th:text="${comic.getStatus()}"></span>
+                            </div>
+                            <div class="card-link badge badge-pill badge-danger m-0">
+                                <span>Subscribers : </span>
+                                <span th:text="${comic.getSubNb()}"></span>
+                            </div>
+                            <div class="card-link badge badge-pill badge-info m-0">
+                                <span>Issues : </span>
+                                <span th:text="${comic.getIssues().size()}"></span>
+                            </div>
                         </div>
                     </a>
                 </div>
