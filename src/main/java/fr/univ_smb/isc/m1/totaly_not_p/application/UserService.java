@@ -90,7 +90,7 @@ public class UserService {
 
     public void save(UserDTO userDTO)
     {
-        userRepository.saveAndFlush(new User(userDTO.getUsername(), userDTO.getPassword(), "USER"));
+        userRepository.saveAndFlush(new User(userDTO.getUsername(), userDTO.getEmail(), userDTO.getPassword(), "USER"));
     }
 
     public void validate(Object o, Errors errors) {

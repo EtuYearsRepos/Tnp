@@ -24,16 +24,8 @@ class Initializer {
         comicRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
 
-        userRepository.saveAndFlush(new User("user", "password", "USER"));
-        userRepository.saveAndFlush(new User("admin", "admin", "ADMIN"));
-
-        /*if (repository.findAll().isEmpty()) {
-            for (int i =0; i < 102; i++)
-                repository.saveAndFlush(new Comic("BD " + i, "AUTEUR " + i));
-
-            repository.saveAndFlush(new Comic("Samère", "bidule"));
-            repository.saveAndFlush(new Comic("bite", "FemmeSa"));
-        }*/
+        userRepository.saveAndFlush(new User("user", "user@user.com", "password", "USER"));
+        userRepository.saveAndFlush(new User("admin", "admin@admin.com", "admin", "ADMIN"));
     }
 
 }
