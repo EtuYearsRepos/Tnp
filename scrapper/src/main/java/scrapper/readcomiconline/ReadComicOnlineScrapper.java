@@ -76,7 +76,7 @@ public class ReadComicOnlineScrapper {
         comic.publisher = infos.get(5).getChildNodes().get(3).getTextContent().trim();
         comic.writer = infos.get(7).getChildNodes().get(3).getTextContent().trim();
         comic.artist = infos.get(9).getChildNodes().get(3).getTextContent().trim();
-        comic.publicationDate = infos.get(11).getChildNodes().get(2).getTextContent().trim().replaceAll("[\\n\\t ]", "");;
+        comic.publicationDate = infos.get(11).getChildNodes().get(2).getTextContent().trim().replaceAll("[\\n\\t]", "");;
         comic.status = infos.get(13).getChildNodes().get(2).getTextContent().trim().replaceAll("[\\n\\t ]", "");;
         comic.summary = infos.get(16).getTextContent().trim().replaceAll("[\\n\\t]", "");;
         if (comic.summary.length() >= 255) {
