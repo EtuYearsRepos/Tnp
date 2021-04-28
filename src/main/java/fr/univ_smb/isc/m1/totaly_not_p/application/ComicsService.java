@@ -2,15 +2,11 @@ package fr.univ_smb.isc.m1.totaly_not_p.application;
 
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicsRepository;
-
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserRepository;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -28,9 +24,6 @@ public class ComicsService {
 
     @Resource
     private ComicsRepository comicRepository;
-
-    @Resource
-    private UserRepository userRepository;
 
     @Transactional
     public ComicDTO addComic(ComicDTO dto) {
@@ -106,7 +99,7 @@ public class ComicsService {
         return responseDTO;
     }
 
-    private ComicSimpleDTO mapEntityToSimpleDto(Comic c) {
+    public ComicSimpleDTO mapEntityToSimpleDto(Comic c) {
         ComicSimpleDTO responseDTO = new ComicSimpleDTO();
         responseDTO.setTitle(c.getTitle());
         responseDTO.setId(c.getId());
@@ -115,73 +108,22 @@ public class ComicsService {
         return responseDTO;
     }
 
-    @Transactional
-    public Boolean addComicSubscriptionToUser(Long id) {
-        Comic c = comicRepository.getOne(id);
-        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (username != null && !username.equals("anonymousUser") && c != null) {
-            System.out.println("Adding comic " + id + " to user " + username);
-            User user = userRepository.findByUsername(username);
-            user.addSubscription(c);
-            userRepository.saveAndFlush(user);
-        } else {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Transactional
-    public Boolean removeComicSubscriptionFromUser(Long id) {
-        Comic c = comicRepository.getOne(id);
-        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (username != null && !username.equals("anonymousUser") && c != null) {
-            System.out.println("Removing comic " + id + " from user " + username);
-            User user = userRepository.findByUsername(username);
-            user.removeSubscription(c);
-            userRepository.saveAndFlush(user);
-        } else {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Transactional
-    public List<ComicSimpleDTO> getUserSubscriptions() {
-        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<ComicSimpleDTO> comicDTOs = new ArrayList<>();
-        if(username != null && !username.equals("anonymousUser")) {
-            User user = userRepository.findByUsername(username);
-            HashSet<Comic> comics = user.getSubscriptions();
-            
-            for (Comic c : comics) {
-                if (c != null) {
-                    comicDTOs.add(mapEntityToSimpleDto(c));
-                }
-            }
-            
-        }
-        return comicDTOs;
-    }
 
     public List<Comic> allComics() {
         return comicRepository.findAll();
     }
 
-    public List<User> allUsers() {
-        return userRepository.findAll();
-    }
 
     public ComicsRepository getRepo()
     {
         return comicRepository;
     }
 
-    public Page<Comic> comicsPageRange(int page, int range) {
-        return comicRepository.findAll(PageRequest.of(page, range));
+    public Page<Comic> comicsPageRange(int page, int range, String sortby, boolean ascending) {
+        if (ascending)
+            return comicRepository.findAll(PageRequest.of(page, range, Sort.by(sortby).ascending()));
+        else
+            return comicRepository.findAll(PageRequest.of(page, range, Sort.by(sortby).descending()));
     }
 
     public Comic findById(long id) {
@@ -200,38 +142,4 @@ public class ComicsService {
         Pageable pageable = PageRequest.of(page, range);
         return comicRepository.findByKeyword(keyword, pageable);
     }
-
-    public String registerUser(UserDTO userDTO)
-    {
-        System.out.println(userDTO.toString());
-
-        if (userDTO.getUsername().equals("anonymousUser") || userDTO.getUsername().equals(null)|| userDTO.getUsername().equals(""))
-        {
-            return "BAD USERNAME";
-        }
-
-        else
-        {
-            User u = userRepository.findByUsername(userDTO.getUsername());
-            if (u != null)
-            {
-                return "USERNAME ALREADY EXISTS";
-            }
-
-            if (!userDTO.getPassword().equals(userDTO.getMatchingPassword()))
-            {
-                return "PASSWORD NOT MACHING";
-            }
-
-        }
-
-        User u = userRepository.saveAndFlush(new User(userDTO.getUsername(), userDTO.getPassword(), "USER"));
-
-        if (u.equals(null))
-        {
-            return "ERROR REGISTERING";
-        }
-        return "REGISTER SUCCESFULL";
-    }
-
 }

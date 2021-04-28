@@ -10,8 +10,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.User;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserRepository;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -52,4 +52,5 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> auth) {
         return auth.equals(UsernamePasswordAuthenticationToken.class);
     }
+    
 }

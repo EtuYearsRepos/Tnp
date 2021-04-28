@@ -18,5 +18,4 @@ public interface ComicsRepository extends JpaRepository<Comic, Long> {
 
     @Query(value="SELECT * FROM Comic c WHERE c.title ILIKE %:keyword% OR c.writer ILIKE %:keyword%", nativeQuery = true)
     List<Comic> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
-
 }

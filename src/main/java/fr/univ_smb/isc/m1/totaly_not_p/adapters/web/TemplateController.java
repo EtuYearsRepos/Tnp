@@ -1,16 +1,20 @@
 package fr.univ_smb.isc.m1.totaly_not_p.adapters.web;
 
 import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
+import fr.univ_smb.isc.m1.totaly_not_p.application.UserService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.UserDTO;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserDTO;
 
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TemplateController {
@@ -19,9 +23,11 @@ public class TemplateController {
     private static final int NUMBER_DISPLAY_PAGE = 4;
 
     private final ComicsService comicsService;
+    private final UserService userService;
 
-    public TemplateController(ComicsService comicsService) {
+    public TemplateController(ComicsService comicsService, UserService userService) {
         this.comicsService = comicsService;
+        this.userService = userService;
     }
     /*************************************/
     //Home Page
@@ -35,7 +41,7 @@ public class TemplateController {
     public String findPage(Model model, @PathVariable(value = "page") int page) {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
-        Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
+        Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE, "title", true);
         List<Comic> listComics = p.getContent();
 
         model.addAttribute("currentPage", page);
@@ -91,7 +97,7 @@ public class TemplateController {
         }
         else
         {
-            Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE);
+            Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE, "title", false);
             List<Comic> listComics = p.getContent();
             
             model.addAttribute("totalPages", p.getTotalPages());
@@ -139,5 +145,25 @@ public class TemplateController {
         return "edit_profile";
     }
 
+    @GetMapping(value = "/register")
+    public String registerPage(Model model){
+
+        UserDTO userDto = new UserDTO();
+        model.addAttribute("user", userDto);
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registration(@ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Model model) {
+        userService.validate(userDTO, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+
+        userService.save(userDTO);
+
+        return "redirect:/";
+    }
 
 }

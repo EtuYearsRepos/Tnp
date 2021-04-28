@@ -1,24 +1,12 @@
-package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
-
-import org.springframework.lang.NonNull;
+package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user;
 
 public class UserDTO {
-    @NonNull
+
     private String firstName;
-
-    @NonNull
     private String lastName;
-
-    @NonNull
     private String username;
-
-    @NonNull
     private String password;
-
-    @NonNull
     private String matchingPassword;
-
-    @NonNull
     private String email;
     
 
@@ -85,10 +73,5 @@ public class UserDTO {
     public void setEmail(String em)
     {
         email = em;
-    }
-
-    public String toString()
-    {
-        return username + " with " + password + "  " + matchingPassword;
     }
 }
