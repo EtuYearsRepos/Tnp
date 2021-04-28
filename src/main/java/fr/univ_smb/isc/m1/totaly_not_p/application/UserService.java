@@ -94,44 +94,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public String registerUser(UserDTO userDTO)
-    {
-        System.out.println(userDTO.toString());
-
-        if (userDTO.getUsername().equals("anonymousUser") || userDTO.getUsername().equals(null)|| userDTO.getUsername().equals(""))
-        {
-            return "BAD USERNAME";
-        }
-
-        else
-        {
-            User u = userRepository.findByUsername(userDTO.getUsername());
-            if (u != null)
-            {
-                return "USERNAME ALREADY EXISTS";
-            }
-
-            if (!userDTO.getPassword().equals(userDTO.getMatchingPassword()))
-            {
-                return "PASSWORD NOT MACHING";
-            }
-
-        }
-
-        User u = userRepository.saveAndFlush(new User(userDTO.getUsername(), userDTO.getPassword(), "USER"));
-
-        if (u.equals(null))
-        {
-            return "ERROR REGISTERING";
-        }
-        return "REGISTER SUCCESFULL";
-    }
-
     public void save(UserDTO userDTO)
     {
         userRepository.saveAndFlush(new User(userDTO.getUsername(), userDTO.getPassword(), "USER"));
     }
-
 
     public void validate(Object o, Errors errors) {
         UserDTO user = (UserDTO) o;
