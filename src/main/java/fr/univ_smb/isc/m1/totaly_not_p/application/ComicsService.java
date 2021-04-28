@@ -2,15 +2,11 @@ package fr.univ_smb.isc.m1.totaly_not_p.application;
 
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicsRepository;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserDTO;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserRepository;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

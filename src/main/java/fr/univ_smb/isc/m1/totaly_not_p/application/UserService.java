@@ -5,14 +5,9 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicsReposito
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserRepository;
-import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicDTO;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.ComicSimpleDTO;
 
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
@@ -24,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {

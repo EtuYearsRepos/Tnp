@@ -146,7 +146,6 @@ public class TemplateController {
         userService.validate(userDTO, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            //model.addAttribute("user", userDTO);
             return "register";
         }
 
