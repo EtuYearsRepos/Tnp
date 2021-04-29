@@ -7,7 +7,6 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 @Entity
 //@Transactional

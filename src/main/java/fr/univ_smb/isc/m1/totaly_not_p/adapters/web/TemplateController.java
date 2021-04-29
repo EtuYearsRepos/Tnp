@@ -26,6 +26,9 @@ public class TemplateController {
     private static final int ELEMENT_PER_PAGE = 20;
     private static final int NUMBER_DISPLAY_PAGE = 4;
     private static final String TITLE_VALUE = "title";
+    private static final String TOTAL_PAGES = "totalPages";
+    private static final String TOTAL_ELEMENTS = "totalElements";
+    private static final String COMICS = "comics";
 
     private final ComicsService comicsService;
     private final UserService userService;
@@ -52,12 +55,12 @@ public class TemplateController {
         List<Comic> listComics = p.getContent();
 
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", p.getTotalPages());
-        model.addAttribute("totalElements", p.getTotalElements());
+        model.addAttribute(TOTAL_PAGES, p.getTotalPages());
+        model.addAttribute(TOTAL_ELEMENTS, p.getTotalElements());
         model.addAttribute("numberDisplayPage", NUMBER_DISPLAY_PAGE);
 
         model.addAttribute(TITLE_VALUE, "Home");
-        model.addAttribute("comics", listComics );
+        model.addAttribute(COMICS, listComics );
 
         model.addAttribute("isConnected", !username.equals("anonymousUser"));
         
@@ -115,20 +118,20 @@ public class TemplateController {
             
             List<Comic> p = comicsService.findByKeywordPage(keyword, page -1, ELEMENT_PER_PAGE);
             
-            model.addAttribute("totalElements", lenghtList);
-            model.addAttribute("totalPages", nbPages);
+            model.addAttribute(TOTAL_ELEMENTS, lenghtList);
+            model.addAttribute(TOTAL_PAGES, nbPages);
             
-            model.addAttribute("comics", p);
+            model.addAttribute(COMICS, p);
         }
         else
         {
             Page<Comic> p = comicsService.comicsPageRange(page - 1, ELEMENT_PER_PAGE, "title", false);
             List<Comic> listComics = p.getContent();
             
-            model.addAttribute("totalPages", p.getTotalPages());
-            model.addAttribute("totalElements", p.getTotalElements());
+            model.addAttribute(TOTAL_PAGES, p.getTotalPages());
+            model.addAttribute(TOTAL_ELEMENTS, p.getTotalElements());
             
-            model.addAttribute("comics", listComics );  
+            model.addAttribute(COMICS, listComics );  
         }
         
         model.addAttribute("currentPage", page);
