@@ -30,8 +30,8 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form> -->
                 <form class="d-flex mx-3" th:action="@{/search/1}" method="get">
-                    <input class="form-control me-2" th:if="${keyword_search == null}" type="text" name="keyword" id="search_keyword" placeholder="Title / Author ...">
-                    <input class="form-control me-2" th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Title / Author ..." th:value="${keyword_search}">
+                    <input class="form-control me-2" th:if="${keyword_search == null}" type="text" name="keyword" id="search_keyword" placeholder="Title">
+                    <input class="form-control me-2" th:unless="${keyword_search == null}"  type="text" name="keyword" id="search_keyword" placeholder="Title" th:value="${keyword_search}">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <a th:if="${isConnected}" class="btn btn-outline-info ml-5" href="/profile">Profil</a> 
