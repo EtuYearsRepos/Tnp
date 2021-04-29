@@ -34,12 +34,12 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="m-3 tab-pane fade show active" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <th:block th:each="fav : ${favs}">
+                                    <th:block th:each="fav : ${favs}">
+                                        <li class="list-group-item">
                                             <a th:href="@{'/api/user/unsubscribe/' + ${fav.getId()} + '/profile'}"><i class="h4 bi bi-bookmark-heart-fill text-danger" id="fav-button"></i></a>
                                             <a class="card-link text-capitalize m-0" th:href="@{'/comic/' + ${fav.getId()}}" th:text="${fav.getTitle()}"></a>
-                                        </th:block>
-                                    </li>
+                                        </li>
+                                    </th:block>
                                 </ul>
                             </div>
                             <!-- <div class="m-3 tab-pane fade" id="edit-profile" role="tabpanel" aria-labelledby="edit-profile-tab">Edit Profile</div> -->
