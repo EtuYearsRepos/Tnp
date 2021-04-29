@@ -16,7 +16,7 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserDTO;
 
-public class UserComicTest {
+class UserComicTest {
 
     private ComicsService comicService;
     private UserService userService;
@@ -49,14 +49,14 @@ public class UserComicTest {
         Comic c1 = new Comic("a", "b", "c", "d", "e", "f", "g");
         assertNotNull(c1);
         assertNotNull(c1.getId());
-        assertEquals(c1.getTitle(), "a");
-        assertEquals(c1.getPublisher(), "b");
-        assertEquals(c1.getWriter(), "c");
-        assertEquals(c1.getArtist(), "d");
-        assertEquals(c1.getPublicationDate(), "e");
-        assertEquals(c1.getStatus(), "f");
-        assertEquals(c1.getSummary(), "g");
-        assertTrue(c1.getSubscribers().size() == 0);
+        assertEquals("a", c1.getTitle());
+        assertEquals("b", c1.getPublisher());
+        assertEquals("c", c1.getWriter());
+        assertEquals("d", c1.getArtist());
+        assertEquals("e", c1.getPublicationDate());
+        assertEquals("f", c1.getStatus());
+        assertEquals("g", c1.getSummary());
+        assertEquals(0, c1.getSubscribers().size());
     }
 
     @Test
@@ -65,18 +65,18 @@ public class UserComicTest {
         User u1 = new User("MichelForever", "Michel@Forever.fr", "ForeverMorever", "USER");
         Comic c1 = new Comic("a", "b", "c", "d", "e", "f", "g");
 
-        assertTrue(u1.getSubscriptions().size() == 0);
-        assertTrue(c1.getSubNb() == 0);
+        assertEquals(0, u1.getSubscriptions().size());
+        assertEquals(0, c1.getSubNb());
 
         u1.addSubscription(c1);
 
-        assertTrue(u1.getSubscriptions().size() == 1);
-        assertTrue(c1.getSubNb() == 1);
+        assertEquals(1, u1.getSubscriptions().size());
+        assertEquals(1, c1.getSubNb());
 
         u1.removeSubscription(c1);
 
-        assertTrue(u1.getSubscriptions().size() == 0);
-        assertTrue(c1.getSubNb() == 0);
+        assertEquals(0, u1.getSubscriptions().size());
+        assertEquals(0, c1.getSubNb());
     }
 
     /*
