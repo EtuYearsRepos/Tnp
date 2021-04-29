@@ -25,6 +25,7 @@ public class TemplateController {
 
     private static final int ELEMENT_PER_PAGE = 20;
     private static final int NUMBER_DISPLAY_PAGE = 4;
+    private static final String TITLE_VALUE = "title";
 
     private final ComicsService comicsService;
     private final UserService userService;
@@ -55,7 +56,7 @@ public class TemplateController {
         model.addAttribute("totalElements", p.getTotalElements());
         model.addAttribute("numberDisplayPage", NUMBER_DISPLAY_PAGE);
 
-        model.addAttribute("title", "Home");
+        model.addAttribute(TITLE_VALUE, "Home");
         model.addAttribute("comics", listComics );
 
         model.addAttribute("isConnected", !username.equals("anonymousUser"));
@@ -86,7 +87,7 @@ public class TemplateController {
 
         }
 
-        model.addAttribute("title", c.getTitle());
+        model.addAttribute(TITLE_VALUE, c.getTitle());
         model.addAttribute("comic", c);
         model.addAttribute("isConnected", !username.equals("anonymousUser"));
         model.addAttribute("isSubscribed", found);
@@ -132,7 +133,7 @@ public class TemplateController {
         
         model.addAttribute("currentPage", page);
         model.addAttribute("numberDisplayPage", NUMBER_DISPLAY_PAGE);
-        model.addAttribute("title", "Search");
+        model.addAttribute(TITLE_VALUE, "Search");
         
         model.addAttribute("keyword_search", keyword);
         model.addAttribute("isConnected", !username.equals("anonymousUser"));
@@ -144,7 +145,7 @@ public class TemplateController {
     //User Actions
     @GetMapping(value = "/login")
     public String login(Model model) {
-        model.addAttribute("title", "Login");
+        model.addAttribute(TITLE_VALUE, "Login");
         return "login";
     }
 
@@ -152,7 +153,7 @@ public class TemplateController {
     public String registerPage(Model model){
 
         UserDTO userDto = new UserDTO();
-        model.addAttribute("title", "Register");
+        model.addAttribute(TITLE_VALUE, "Register");
         model.addAttribute("user", userDto);
         return "register";
     }
@@ -167,7 +168,7 @@ public class TemplateController {
             model.addAttribute("favs", favorites);
             model.addAttribute("isConnected", !username.equals("anonymousUser"));
         }
-        model.addAttribute("title", username);
+        model.addAttribute(TITLE_VALUE, username);
 
 
         return "profile_template";
@@ -175,7 +176,7 @@ public class TemplateController {
     
     @GetMapping(value = "/edit_profile")
     public String editProfilePage(Model model){
-        model.addAttribute("title", "Profile edition");
+        model.addAttribute(TITLE_VALUE, "Profile edition");
         return "edit_profile";
     }
 

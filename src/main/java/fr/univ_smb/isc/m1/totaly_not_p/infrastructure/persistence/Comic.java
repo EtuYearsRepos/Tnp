@@ -105,11 +105,11 @@ public class Comic implements Serializable {
         return summary;
     }
 
-    public void setIssues(List<String> issues) {
-        this.issues = (ArrayList<String>) issues;
+    public void setIssues(ArrayList<String> issues) {
+        this.issues = issues;
     }
 
-    public List<String> getIssues() {
+    public ArrayList<String> getIssues() {
         return issues;
     }
 
