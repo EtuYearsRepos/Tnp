@@ -1,6 +1,7 @@
 package fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ComicDTO {
     private Long id;
@@ -78,8 +79,8 @@ public class ComicDTO {
         return summary;
     }
 
-    public void setIssues(ArrayList<String> issues) {
-        this.issues = issues;
+    public void setIssues(List<String> list) {
+        this.issues = (ArrayList<String>) list;
     }
 
     public ArrayList<String> getIssues() {
