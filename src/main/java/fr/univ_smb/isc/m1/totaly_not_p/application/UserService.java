@@ -40,7 +40,7 @@ public class UserService {
         Comic c = comicRepository.getOne(id);
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (username != null && !username.equals(ANONYMOUS_USER) && c != null) {
+        if (username != null && !username.equals(ANONYMOUS_USER)) {
             System.out.println("Adding comic " + id + " to user " + username);
             User user = userRepository.findByUsername(username);
             user.addSubscription(c);
