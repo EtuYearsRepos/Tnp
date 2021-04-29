@@ -14,6 +14,7 @@ import fr.univ_smb.isc.m1.totaly_not_p.application.ComicsService;
 import fr.univ_smb.isc.m1.totaly_not_p.application.UserService;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.Comic;
 import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
+import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.UserDTO;
 
 public class UserComicTest {
 
@@ -76,5 +77,19 @@ public class UserComicTest {
 
         assertTrue(u1.getSubscriptions().size() == 0);
         assertTrue(c1.getSubNb() == 0);
-    }  
+    }
+
+    @Test
+    void insertUser()
+    {
+        User u1 = new User("MichelForever", "Michel@Forever.fr", "ForeverMorever", "USER");
+        UserDTO dto = new UserDTO();
+        dto.setUsername(u1.getUsername());
+        dto.setPassword(u1.getPassword());
+        dto.setEmail(u1.getEmail());
+        userService.save(dto);
+
+        assertTrue(userService.allUsers().size() == 1);
+
+    }
 }
