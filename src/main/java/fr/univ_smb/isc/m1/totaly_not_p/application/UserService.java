@@ -33,12 +33,14 @@ public class UserService {
     @Resource
     private ComicsService comicsService;
 
+    private final static String ANONYMOUS_USER = "anonymousUser";
+
     @Transactional
     public Boolean addComicSubscriptionToUser(Long id) {
         Comic c = comicRepository.getOne(id);
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (username != null && !username.equals("anonymousUser") && c != null) {
+        if (username != null && !username.equals(ANONYMOUS_USER) && c != null) {
             System.out.println("Adding comic " + id + " to user " + username);
             User user = userRepository.findByUsername(username);
             user.addSubscription(c);
@@ -68,7 +70,7 @@ public class UserService {
         Comic c = comicRepository.getOne(id);
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (username != null && !username.equals("anonymousUser") && c != null) {
+        if (username != null && !username.equals(ANONYMOUS_USER) && c != null) {
             System.out.println("Removing comic " + id + " from user " + username);
             User user = userRepository.findByUsername(username);
             
@@ -97,7 +99,7 @@ public class UserService {
     public List<ComicSimpleDTO> getUserSubscriptions() {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<ComicSimpleDTO> comicDTOs = new ArrayList<>();
-        if(username != null && !username.equals("anonymousUser")) {
+        if(username != null && !username.equals(ANONYMOUS_USER)) {
             User user = userRepository.findByUsername(username);
             HashSet<Comic> comics = user.getSubscriptions();
             
@@ -123,13 +125,14 @@ public class UserService {
     public void validate(Object o, Errors errors) {
         UserDTO user = (UserDTO) o;
 
+        final String SUsername = "username";
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, SUsername, "NotEmpty");
         if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
-            errors.rejectValue("username", "Size.userForm.username");
+            errors.rejectValue(SUsername, "Size.userForm.username");
         }
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+            errors.rejectValue(SUsername, "Duplicate.userForm.username");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");

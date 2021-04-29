@@ -29,6 +29,8 @@ public class TemplateController {
     private static final String TOTAL_PAGES = "totalPages";
     private static final String TOTAL_ELEMENTS = "totalElements";
     private static final String COMICS = "comics";
+    private static final String ANONYMOUS_USER = "anonymousUser";
+    private static final String IS_CONNECTED = "isConnected";
 
     private final ComicsService comicsService;
     private final UserService userService;
@@ -62,7 +64,7 @@ public class TemplateController {
         model.addAttribute(TITLE_VALUE, "Home");
         model.addAttribute(COMICS, listComics );
 
-        model.addAttribute("isConnected", !username.equals("anonymousUser"));
+        model.addAttribute(IS_CONNECTED, !username.equals(ANONYMOUS_USER));
         
         return "home_template";
     }
@@ -75,7 +77,7 @@ public class TemplateController {
         User u;
 
         boolean found = false;
-        if (!username.equals("anonymousUser") && username != null)
+        if (!username.equals(ANONYMOUS_USER) && username != null)
         {
             u = userRepository.findByUsername(username);
             HashSet<Comic> h = u.getSubscriptions();
@@ -92,7 +94,7 @@ public class TemplateController {
 
         model.addAttribute(TITLE_VALUE, c.getTitle());
         model.addAttribute("comic", c);
-        model.addAttribute("isConnected", !username.equals("anonymousUser"));
+        model.addAttribute(IS_CONNECTED, !username.equals(ANONYMOUS_USER));
         model.addAttribute("isSubscribed", found);
 
 
@@ -139,7 +141,7 @@ public class TemplateController {
         model.addAttribute(TITLE_VALUE, "Search");
         
         model.addAttribute("keyword_search", keyword);
-        model.addAttribute("isConnected", !username.equals("anonymousUser"));
+        model.addAttribute(IS_CONNECTED, !username.equals(ANONYMOUS_USER));
         
         return "search_template";
     }
@@ -164,12 +166,12 @@ public class TemplateController {
     @GetMapping(value = "/profile")
     public String userPage(Model model){
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (username != null && !username.equals("anonymousUser")) {
+        if (username != null && !username.equals(ANONYMOUS_USER)) {
             User user = userRepository.findByUsername(username);
             List<Comic> favorites = new ArrayList<Comic>(user.getSubscriptions());
             model.addAttribute("current_user", user);
             model.addAttribute("favs", favorites);
-            model.addAttribute("isConnected", !username.equals("anonymousUser"));
+            model.addAttribute(IS_CONNECTED, !username.equals(ANONYMOUS_USER));
         }
         model.addAttribute(TITLE_VALUE, username);
 
