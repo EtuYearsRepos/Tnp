@@ -25,6 +25,7 @@ public class TemplateController {
 
     private static final int ELEMENT_PER_PAGE = 20;
     private static final int NUMBER_DISPLAY_PAGE = 4;
+
     private static final String TITLE_VALUE = "title";
     private static final String TOTAL_PAGES = "totalPages";
     private static final String TOTAL_ELEMENTS = "totalElements";
@@ -72,12 +73,12 @@ public class TemplateController {
     //Comic page
     @GetMapping(value="/comic/{id}")
     public String comicPage(Model model, @PathVariable("id") long id) {
-        Comic c = comicsService.findById(id);
+        var c = comicsService.findById(id);
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User u;
 
-        boolean found = false;
-        if (!username.equals(ANONYMOUS_USER) && username != null)
+        var found = false;
+        if (!username.equals(ANONYMOUS_USER))
         {
             u = userRepository.findByUsername(username);
             HashSet<Comic> h = u.getSubscriptions();
@@ -157,7 +158,7 @@ public class TemplateController {
     @GetMapping(value = "/register")
     public String registerPage(Model model){
 
-        UserDTO userDto = new UserDTO();
+        var userDto = new UserDTO();
         model.addAttribute(TITLE_VALUE, "Register");
         model.addAttribute("user", userDto);
         return "register";
@@ -168,7 +169,7 @@ public class TemplateController {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (username != null && !username.equals(ANONYMOUS_USER)) {
             User user = userRepository.findByUsername(username);
-            List<Comic> favorites = new ArrayList<Comic>(user.getSubscriptions());
+            List<Comic> favorites = new ArrayList<>(user.getSubscriptions());
             model.addAttribute("current_user", user);
             model.addAttribute("favs", favorites);
             model.addAttribute(IS_CONNECTED, !username.equals(ANONYMOUS_USER));
