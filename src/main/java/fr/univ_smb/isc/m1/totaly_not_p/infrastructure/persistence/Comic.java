@@ -38,6 +38,16 @@ public class Comic implements Serializable {
         // JPA
     }
 
+    public Comic(String title, String publisher, String writer, String artist, String publicationDate, String status, String summary) {
+        this.title = title;
+        this.publisher = publisher;
+        this.writer = writer;
+        this.artist = artist;
+        this.publicationDate = publicationDate;
+        this.status = status;
+        this.summary = summary;
+    }
+
     @Id
     public Long getId() {
         return id;
