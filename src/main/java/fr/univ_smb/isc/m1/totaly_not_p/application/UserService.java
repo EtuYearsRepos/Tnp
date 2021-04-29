@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -42,9 +43,19 @@ public class UserService {
             User user = userRepository.findByUsername(username);
             user.addSubscription(c);
 
-            Comic comic = comicRepository.findById(c.getId()).get();
-            comic.addSubscriber(user);
-            userRepository.saveAndFlush(user);
+
+            
+            if (comicRepository.findById(c.getId()).isPresent())
+            {
+                Comic comic = comicRepository.findById(c.getId()).get();
+                comic.addSubscriber(user);
+                userRepository.saveAndFlush(user);
+            }
+            else
+            {
+                return false;
+            }
+
         } else {
             return false;
         }
@@ -60,11 +71,20 @@ public class UserService {
         if (username != null && !username.equals("anonymousUser") && c != null) {
             System.out.println("Removing comic " + id + " from user " + username);
             User user = userRepository.findByUsername(username);
-            user.removeSubscription(c);
-            userRepository.saveAndFlush(user);
-
-            Comic comic = comicRepository.findById(c.getId()).get();
-            comic.removeSubscriber(user);
+            
+            
+            if (comicRepository.findById(c.getId()).isPresent())
+            {
+                user.removeSubscription(c);
+                userRepository.saveAndFlush(user);
+                Comic comic = comicRepository.findById(c.getId()).get();
+                comic.removeSubscriber(user);
+            }
+            else
+            {
+                return false;
+            }
+            
         } else {
             return false;
         }

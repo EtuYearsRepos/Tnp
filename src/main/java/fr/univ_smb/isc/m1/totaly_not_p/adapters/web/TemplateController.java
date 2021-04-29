@@ -71,12 +71,12 @@ public class TemplateController {
         User u;
 
         boolean found = false;
-        if (!username.equals("anonymousUser") && !username.equals(null))
+        if (!username.equals("anonymousUser") && username != null)
         {
             u = userRepository.findByUsername(username);
             HashSet<Comic> h = u.getSubscriptions();
             for (Comic comic : h) {
-                if (comic.getId().longValue() == comic.getId().longValue())
+                if (comic.getId().longValue() == c.getId().longValue())
                 {
                     found = true;
                     break;
@@ -165,10 +165,10 @@ public class TemplateController {
             List<Comic> favorites = new ArrayList<Comic>(user.getSubscriptions());
             model.addAttribute("current_user", user);
             model.addAttribute("favs", favorites);
+            model.addAttribute("isConnected", !username.equals("anonymousUser"));
         }
         model.addAttribute("title", username);
 
-        model.addAttribute("isConnected", !username.equals("anonymousUser"));
 
         return "profile_template";
     }
