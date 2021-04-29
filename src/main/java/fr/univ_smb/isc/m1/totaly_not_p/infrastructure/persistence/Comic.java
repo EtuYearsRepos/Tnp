@@ -31,7 +31,7 @@ public class Comic implements Serializable {
     private Integer subNb = 0;
     
     @ManyToMany(mappedBy="subscriptions", fetch = FetchType.EAGER)
-    private HashSet<User> subscribers = new HashSet<User>();
+    private HashSet<User> subscribers = new HashSet<>();
     
 
     public Comic() {
