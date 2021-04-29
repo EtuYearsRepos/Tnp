@@ -28,23 +28,21 @@ public class UserController {
     public ResponseEntity<List<String>> getAllUsers() {
         
         List<String> usernames = new ArrayList<>();
-        userService.allUsers().forEach(user -> {
-            usernames.add(user.getUsername());
-        });
+        userService.allUsers().forEach(user -> 
+            usernames.add(user.getUsername())
+        );
         return new ResponseEntity<>(usernames, HttpStatus.OK);
     }
 
     @GetMapping(value="api/user/subscribe/{id}")
     public ResponseEntity<Boolean> subscribe(@PathVariable(name = "id") Long id) {
-        Boolean success = userService.addComicSubscriptionToUser(id);
-        //return new ResponseEntity<>(success, HttpStatus.OK);
-
+        userService.addComicSubscriptionToUser(id);
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/comic/" + id)).build();
     }
 
     @GetMapping(value="api/user/unsubscribe/{id}/{from}")
     public ResponseEntity<Boolean> unsubscribe(@PathVariable(name = "id") Long id, @PathVariable(name = "from") String from) {
-        Boolean success = userService.removeComicSubscriptionFromUser(id);
+        userService.removeComicSubscriptionFromUser(id);
 
         if (from.equals("profile"))
             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/profile")).build();

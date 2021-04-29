@@ -43,11 +43,11 @@ public class UserService {
             User user = userRepository.findByUsername(username);
             user.addSubscription(c);
 
-
+            Optional<Comic> optComic = comicRepository.findById(c.getId());
             
-            if (comicRepository.findById(c.getId()).isPresent())
+            if (optComic.isPresent())
             {
-                Comic comic = comicRepository.findById(c.getId()).get();
+                Comic comic = optComic.get();
                 comic.addSubscriber(user);
                 userRepository.saveAndFlush(user);
             }
@@ -72,12 +72,13 @@ public class UserService {
             System.out.println("Removing comic " + id + " from user " + username);
             User user = userRepository.findByUsername(username);
             
+            Optional<Comic> optComic = comicRepository.findById(c.getId());
             
-            if (comicRepository.findById(c.getId()).isPresent())
+            if (optComic.isPresent())
             {
                 user.removeSubscription(c);
                 userRepository.saveAndFlush(user);
-                Comic comic = comicRepository.findById(c.getId()).get();
+                Comic comic = optComic.get();
                 comic.removeSubscriber(user);
             }
             else
