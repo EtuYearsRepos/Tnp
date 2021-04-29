@@ -40,7 +40,7 @@ class UserComicTest {
         assertEquals("MichelForever", u1.getUsername());
         assertEquals("Michel@Forever.fr", u1.getEmail());
         assertEquals("USER", u1.getRole());
-        assertTrue(u1.getSubscriptions().size() == 0);
+        assertEquals(0, u1.getSubscriptions().size());
     }
 
     @Test
