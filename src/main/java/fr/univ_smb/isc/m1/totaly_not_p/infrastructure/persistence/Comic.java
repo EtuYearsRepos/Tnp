@@ -7,6 +7,7 @@ import fr.univ_smb.isc.m1.totaly_not_p.infrastructure.persistence.user.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 @Entity
 //@Transactional
@@ -25,17 +26,10 @@ public class Comic implements Serializable {
     private String publicationDate;
     private String status;
 
-    //@Column(length=10485760)
-    //@Column(name="summary",columnDefinition="LONGTEXT")
     private String summary;
     @Basic 
     private ArrayList<String> issues = new ArrayList<>();
     private Integer subNb = 0;
-
-    //@Column(name="thumbnail")
-    //@JsonIgnore
-    //private byte[] thumbnail;
-
     
     @ManyToMany(mappedBy="subscriptions", fetch = FetchType.EAGER)
     private HashSet<User> subscribers = new HashSet<User>();
@@ -44,13 +38,6 @@ public class Comic implements Serializable {
     public Comic() {
         // JPA
     }
-
-    /*
-    @Override
-    public boolean equals(Object obj) {
-        return this.id.equals(((Comic) obj).getId());
-    }
-    */
 
     @Id
     public Long getId() {
@@ -118,11 +105,11 @@ public class Comic implements Serializable {
         return summary;
     }
 
-    public void setIssues(ArrayList<String> issues) {
-        this.issues = issues;
+    public void setIssues(List<String> issues) {
+        this.issues = (ArrayList<String>) issues;
     }
 
-    public ArrayList<String> getIssues() {
+    public List<String> getIssues() {
         return issues;
     }
 
@@ -135,56 +122,29 @@ public class Comic implements Serializable {
         this.subNb = subNb;
     } 
 
-
-    /*
-    @Lob
-    @Column(name = "THUMBNAIL", length = 1111111, nullable = true)
-    public byte[] getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(byte[] thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-    */
-
     
     public HashSet<User> getSubscribers() {
         return subscribers;
     }
     public void setSubscribers(HashSet<User> subscribers) {
         this.subscribers = subscribers;
-        //this.subNb = subscribers.size();
     }
 
     public void addSubscriber(User user) {
         this.subscribers.add(user);
-        //user.getSubscriptions().add(this);
-        //this.subNb = subscribers.size();
     }
 
     public void removeSubscriber(User user) {
         this.subscribers.remove(user);
-        //user.getSubscriptions().remove(this);
-        //this.subNb = subscribers.size();
     }
     
     public void removeSubscribers() {
         for (User u : this.subscribers) {
             this.removeSubscriber(u);
         }
-        //this.subNb = subscribers.size();
     }
 
-    public String toString() {
-        
-        /*
-        String subs = new String();
-        for (User u : subscribers) {
-            subs += u.getUsername();
-        }
-        */
-        
+    public String toString() {        
         return id + " : " + title + " by " + publisher;
     }
 }
